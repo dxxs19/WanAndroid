@@ -1,22 +1,22 @@
-package com.wei.wanandroid;
+package com.wei.wanandroid.activity;
 
+import android.animation.ObjectAnimator;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import com.facebook.cache.common.CacheKey;
 import com.facebook.common.logging.FLog;
 import com.facebook.common.references.CloseableReference;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.drawable.ProgressBarDrawable;
 import com.facebook.drawee.generic.GenericDraweeHierarchy;
-import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
 import com.facebook.drawee.generic.RoundingParams;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -26,23 +26,40 @@ import com.facebook.imagepipeline.image.QualityInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
+import com.wei.wanandroid.R;
+import com.wei.wanandroid.activity.BaseActivity;
+import com.wei.wanandroid.widgets.CusImgView;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * @author Administrator
  */
 public class MainActivity extends BaseActivity
 {
+    @BindView(R.id.imgView_move)
+    CusImgView mMoveImgView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
     }
 
     @Override
     public void initView() {
         setImageUri();
         setRoundedImage();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mMoveImgView.smoothScrollTo(-400, 0);
+//        mMoveImgView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.translate));
+//        ObjectAnimator.ofFloat(mMoveImgView, "translationX", 0, 400).setDuration(3000).start();
     }
 
     private void setRoundedImage()

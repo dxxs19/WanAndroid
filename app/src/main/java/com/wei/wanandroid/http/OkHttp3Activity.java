@@ -3,7 +3,7 @@ package com.wei.wanandroid.http;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.wei.wanandroid.BaseActivity;
+import com.wei.wanandroid.activity.BaseActivity;
 import com.wei.wanandroid.R;
 
 import java.io.File;
@@ -12,11 +12,9 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;

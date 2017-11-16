@@ -7,9 +7,8 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
-import com.wei.wanandroid.BaseActivity;
+import com.wei.wanandroid.activity.BaseActivity;
 import com.wei.wanandroid.R;
 
 import permissions.dispatcher.NeedsPermission;

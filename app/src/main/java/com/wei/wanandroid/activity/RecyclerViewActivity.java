@@ -1,25 +1,20 @@
-package com.wei.wanandroid.widgets;
+package com.wei.wanandroid.activity;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.wei.wanandroid.BaseActivity;
 import com.wei.wanandroid.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -50,19 +45,16 @@ public class RecyclerViewActivity extends BaseActivity {
         ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1);
         scheduledThreadPoolExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
-            public void run()
-            {
-                if (isShouldRun)
-                {
-                    Log.e(TAG, count ++ + "");
+            public void run() {
+                if (isShouldRun) {
+                    Log.e(TAG, count++ + "");
                 }
             }
         }, 1, 1, TimeUnit.SECONDS);
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         isShouldRun = true;
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));//(new LinearLayoutManager(this));
@@ -101,16 +93,6 @@ public class RecyclerViewActivity extends BaseActivity {
         @Override
         public int getItemCount() {
             return mDatas.size();
-        }
-
-        public void addData(int i)
-        {
-            mDatas.add(i + "");
-            Random random = new Random();
-            int position = random.nextInt(mDatas.size());
-            Log.e(TAG, "position = " + position);
-            notifyItemInserted(position);
-            notifyDataSetChanged();
         }
 
         class MyViewHolder extends RecyclerView.ViewHolder {

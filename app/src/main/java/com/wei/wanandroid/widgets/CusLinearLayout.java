@@ -6,6 +6,8 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
 /**
@@ -15,6 +17,8 @@ import android.widget.LinearLayout;
 
 public class CusLinearLayout extends LinearLayout
 {
+    private final String TAG = getClass().getSimpleName();
+
     public CusLinearLayout(Context context) {
         this(context, null);
     }
@@ -36,6 +40,25 @@ public class CusLinearLayout extends LinearLayout
 
     @Override
     protected void onDraw(Canvas canvas) {
+        Log.e(TAG, "--- onDraw ---");
         super.onDraw(canvas);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.e(TAG, "--- dispatchTouchEvent ---");
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Log.e(TAG, "--- onInterceptTouchEvent ---");
+        return super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.e(TAG, "--- onTouchEvent ---");
+        return super.onTouchEvent(event);
     }
 }

@@ -17,7 +17,7 @@
         fresco:placeholderImage="@drawable/ic_launcher_background"
         />
 
-    <LinearLayout
+    <com.wei.wanandroid.widgets.CusLinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -25,7 +25,7 @@
             android:id="@+id/imgView_move"
             android:layout_width="60dp"
             android:layout_height="60dp"/>
-    </LinearLayout>
+    </com.wei.wanandroid.widgets.CusLinearLayout>
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/draweeView_mid"

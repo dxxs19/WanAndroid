@@ -1,5 +1,7 @@
 package com.wei.wanandroid.javasources;
 
+import android.text.TextUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +30,9 @@ public class CollectionsTest
         System.out.println(100 >> 2);
         // 左移n位相当于乘以2的n次方。例，100左移2位相当于100*4 = 400。
         System.out.println(100 << 2);
+
+        String aaa = null;
+        System.out.println(!"".equals(aaa));
     }
 
 }

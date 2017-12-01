@@ -27,7 +27,7 @@ public class NumOrder
     private int getTopNum(int num, int rate)
     {
         int top = num/rate;
-        if (top > 0 && top < 9)
+        if (top > 0 && top <= 9)
         {
             System.out.println("top = " + top);
             numArray.add(top);

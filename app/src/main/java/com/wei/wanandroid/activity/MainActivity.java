@@ -6,6 +6,7 @@ import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,6 +64,7 @@ public class MainActivity extends BaseActivity
         mMoveImgView.smoothScrollTo(-400, 0);
 //        mMoveImgView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.translate));
 //        ObjectAnimator.ofFloat(mMoveImgView, "translationX", 0, 400).setDuration(3000).start();
+        TextUtils.equals(null, null);
     }
 
     private void setRoundedImage()

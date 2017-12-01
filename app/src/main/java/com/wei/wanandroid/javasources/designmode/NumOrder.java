@@ -1,5 +1,8 @@
 package com.wei.wanandroid.javasources.designmode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author: WEI
  * @date: 2017/11/30
@@ -7,13 +10,37 @@ package com.wei.wanandroid.javasources.designmode;
 
 public class NumOrder
 {
-    public static void main(String[] args) {
-        System.out.println(new NumOrder().order(15734));
+    private static String a = null;
+
+    public static void main(String[] args)
+    {
+        NumOrder numOrder = new NumOrder();
+        System.out.println(numOrder.order(15734));
+        String b = a;
+        System.out.println(a + "");
+        System.out.println( (a + "").equals(a) );
+        System.out.println( numOrder.getTopNum(15987, 1 ) );
+        System.out.println( numOrder.numArray.toArray() );
     }
 
-    private int getTopNum(int num)
+    List numArray = new ArrayList();
+    private int getTopNum(int num, int rate)
     {
-        return 0;
+        int top = num/rate;
+        if (top > 0 && top < 9)
+        {
+            System.out.println("top = " + top);
+            numArray.add(top);
+            if (rate > 1)
+            {
+                getTopNum(num%rate, rate/10);
+            }
+        }
+        else
+        {
+            getTopNum(num, rate * 10);
+        }
+        return top;
     }
 
     private int order(int num)

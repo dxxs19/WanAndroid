@@ -50,6 +50,13 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        ClassLoader classLoader = getClassLoader();
+        while (classLoader != null)
+        {
+            Log.e(TAG, classLoader.toString());
+            classLoader = classLoader.getParent();
+        }
     }
 
     @Override

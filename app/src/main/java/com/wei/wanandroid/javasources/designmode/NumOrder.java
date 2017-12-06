@@ -1,7 +1,9 @@
 package com.wei.wanandroid.javasources.designmode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * @author: WEI
@@ -20,7 +22,19 @@ public class NumOrder
         System.out.println(a + "");
         System.out.println( (a + "").equals(a) );
         System.out.println( numOrder.getTopNum(15987, 1 ) );
-        System.out.println( numOrder.numArray.toArray() );
+//        System.out.println( numOrder.numArray.toArray() );
+        numOrder.order( parseIntArray(numOrder.numArray) );
+    }
+
+    private static int[] parseIntArray(List<Integer> numArray)
+    {
+        int size = numArray.size();
+        int[] targetArray = new int[size];
+        for (int i = 0 ; i < size ; i ++)
+        {
+            targetArray[i] = numArray.get(i);
+        }
+        return targetArray;
     }
 
     List numArray = new ArrayList();
@@ -51,12 +65,19 @@ public class NumOrder
         int forthNum = ( num % 100) / 10;
         int fifthNum = ( num % 10) / 1;
         int[] array = {firstNum, secondNum, thirdNum, forthNum, fifthNum};
+        order(array);
+        int size = array.length;
+        return array[size-1]*10000 + array[size-2]*1000 + array[size-3] * 100 + array[size-4] * 10 + array[0] ;
+    }
+
+    private void order(int[] array)
+    {
         int size = array.length , temp = 0;
         for (int i = 1 ; i < size ; i ++)
         {
             for (int j = i; j <= size-i; j ++)
             {
-                if (array[j] < array[j - 1])
+                if ( array[j] < array[j - 1] )
                 {
                     temp = array[j];
                     array[j] = array[j - 1];
@@ -64,6 +85,10 @@ public class NumOrder
                 }
             }
         }
-        return array[size-1]*10000 + array[size-2]*1000 + array[size-3] * 100 + array[size-4] * 10 + array[0] ;
+
+        for (int a : array) {
+            System.out.print(a);
+        }
     }
+
 }

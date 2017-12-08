@@ -33,6 +33,11 @@ public class CollectionsTest
 
         String aaa = null;
         System.out.println(!"".equals(aaa));
+
+        String[] strings = (String[]) list.toArray(new String[list.size()]);
+        for (String s:strings) {
+            System.out.println(s);
+        }
     }
 
 }

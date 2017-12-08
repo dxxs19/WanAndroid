@@ -1,5 +1,6 @@
 package com.wei.wanandroid.javasources.designmode;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,11 +13,13 @@ import java.util.stream.IntStream;
 
 public class NumOrder
 {
-    private static String a = null;
+    public static String a = null;
+    private String b = null;
 
     public static void main(String[] args)
     {
         NumOrder numOrder = new NumOrder();
+        System.out.println(numOrder.b);
         System.out.println(numOrder.order(15734));
         String b = a;
         System.out.println(a + "");
@@ -24,6 +27,16 @@ public class NumOrder
         System.out.println( numOrder.getTopNum(15987, 1 ) );
 //        System.out.println( numOrder.numArray.toArray() );
         numOrder.order( parseIntArray(numOrder.numArray) );
+
+        System.out.println();
+        String strs = "adcbegklopewt";
+        StringBuilder builder = new StringBuilder(strs);
+        System.out.println( builder.reverse() );
+    }
+
+    public NumOrder()
+    {
+        b = "2";
     }
 
     private static int[] parseIntArray(List<Integer> numArray)

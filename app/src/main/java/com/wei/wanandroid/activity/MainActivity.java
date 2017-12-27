@@ -1,6 +1,7 @@
 package com.wei.wanandroid.activity;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
@@ -57,6 +58,12 @@ public class MainActivity extends BaseActivity
             Log.e(TAG, classLoader.toString());
             classLoader = classLoader.getParent();
         }
+//        startService();
+//        startActivity();
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("customscheme://com.hori.smartcommunity/notify_details?title=good news" +
+                "&content=this is a test notification."));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        String intentUri = intent.toUri(Intent.URI_INTENT_SCHEME);
     }
 
     @Override

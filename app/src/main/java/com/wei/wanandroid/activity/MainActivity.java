@@ -1,6 +1,5 @@
 package com.wei.wanandroid.activity;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Animatable;
@@ -11,9 +10,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.animation.AnimationUtils;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 
 import com.facebook.cache.common.CacheKey;
 import com.facebook.common.logging.FLog;
@@ -31,8 +27,9 @@ import com.facebook.imagepipeline.image.QualityInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
+import com.wei.wanandroid.service.JobHandlerService;
+import com.wei.wanandroid.service.KeepAliveService;
 import com.wei.wanandroid.R;
-import com.wei.wanandroid.activity.BaseActivity;
 import com.wei.wanandroid.widgets.CusImgView;
 
 import butterknife.BindView;
@@ -58,12 +55,12 @@ public class MainActivity extends BaseActivity
             Log.e(TAG, classLoader.toString());
             classLoader = classLoader.getParent();
         }
-//        startService();
-//        startActivity();
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("customscheme://com.hori.smartcommunity/notify_details?title=good news" +
-                "&content=this is a test notification."));
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        String intentUri = intent.toUri(Intent.URI_INTENT_SCHEME);
+
+        startService(new Intent(this, JobHandlerService.class));
+//        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("customscheme://com.hori.smartcommunity/notify_details?title=good news" +
+//                "&content=this is a test notification."));
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        String intentUri = intent.toUri(Intent.URI_INTENT_SCHEME);
     }
 
     @Override

@@ -27,7 +27,7 @@ public class WanApplication extends Application
     public void onCreate() {
         super.onCreate();
         Fresco.initialize(this);
-        initCloudChannel(this);
+//        initCloudChannel(this);
     }
 
     /**

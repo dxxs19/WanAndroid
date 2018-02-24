@@ -1,15 +1,23 @@
 package com.wei.wanandroid.activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.facebook.cache.common.CacheKey;
 import com.facebook.common.logging.FLog;
@@ -27,6 +35,7 @@ import com.facebook.imagepipeline.image.QualityInfo;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
+import com.wei.utillibrary.FileUtil;
 import com.wei.wanandroid.service.JobHandlerService;
 import com.wei.wanandroid.service.KeepAliveService;
 import com.wei.wanandroid.R;
@@ -45,22 +54,24 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.e(TAG, "--- onCreate ---");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        ClassLoader classLoader = getClassLoader();
-        while (classLoader != null)
-        {
-            Log.e(TAG, classLoader.toString());
-            classLoader = classLoader.getParent();
-        }
-
-        startService(new Intent(this, JobHandlerService.class));
+//        ClassLoader classLoader = getClassLoader();
+//        while (classLoader != null)
+//        {
+//            Log.e(TAG, classLoader.toString());
+//            classLoader = classLoader.getParent();
+//        }
+//
+//        startService(new Intent(this, KeepAliveService.class));
 //        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("customscheme://com.hori.smartcommunity/notify_details?title=good news" +
 //                "&content=this is a test notification."));
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        String intentUri = intent.toUri(Intent.URI_INTENT_SCHEME);
+
     }
 
     @Override
@@ -185,17 +196,56 @@ public class MainActivity extends BaseActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        Log.e(TAG, "onCreateOptionsMenu");
+        getMenuInflater().inflate(R.menu.menu_lzlmain, menu);
+        // 每次打开菜单都会回调onPrepareOptionsMenu，但onCreateOptionsMenu只回调一次
+        menu.add(Menu.NONE, Menu.FIRST + 1, 0, "最后的菜单");
+        // true 显示；false 不显示。因为 getParent() == null, 所以实际上 super.onPrepareOptionsMenu(menu) == true
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
-        return super.onMenuItemSelected(featureId, item);
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        Log.e(TAG, "onPrepareOptionsMenu, parent == " + getParent());
+        // true 显示；false 不显示。因为 getParent() == null, 所以实际上 super.onPrepareOptionsMenu(menu) == true
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
+        Log.e(TAG, "onOptionsItemSelected, " + item.getItemId());
+        switch (item.getItemId())
+        {
+            case R.id.action_about_us:
+                Log.e(TAG, item.getTitle() + "");
+//                startActivity(new Intent(this, RecyclerViewActivity.class));
+                showDialog();
+                break;
+
+            case Menu.FIRST + 1:
+                Log.e(TAG, "最后添加的菜单");
+                break;
+
+            default:
+        }
+        return true;
     }
 
+    private void showDialog()
+    {
+        Dialog dialog = new AlertDialog.Builder(this)
+                .setTitle("测试对话框")
+                .show();
+    }
+
+    public void setPermission(View view)
+    {
+        Log.e(TAG, "--- setPermission ---");
+        Intent mAccessibleIntent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+        mAccessibleIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(mAccessibleIntent);
+
+        FileUtil.saveFile("hello , this is a test !");
+        FileUtil.saveFile("I love beautyleg !");
+    }
 }

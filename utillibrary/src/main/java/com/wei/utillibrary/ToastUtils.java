@@ -22,7 +22,6 @@ public class ToastUtils {
         message.arg1 = period;
         message.obj = msg;
         tipsHandler.sendMessage(message);
-
     }
 
     private static class TipsHandler extends Handler {

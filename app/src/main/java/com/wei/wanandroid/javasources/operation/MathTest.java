@@ -22,9 +22,12 @@ public class MathTest
 
     public static void main(String[] args)
     {
-        long round = Math.round(11.5);   // 四舍五入
+        long round = Math.round(11.5);   // 括号内的数+0.5之后，向下取最大整数值
         double ceil = Math.ceil(-11.5); // 大于它的最小整数
         double floor = Math.floor(-11.5);  // 小于它的最大整数
         System.out.println( round + ", " + ceil + ", " + floor); // 12, -11.0, -12.0
+
+        System.out.println(Math.round(11.4) + ", " + Math.round(11.5) + ", " + Math.round( -11.4 ) + ", " + Math.round( - 11.5 )
+                + ", " + Math.round( -11.6 ) + ", " + Math.round( -11.9 )); // 11, 12, -11, -11, -12, -12 ; 括号内的数+0.5之后，向下取最大整数值
     }
 }

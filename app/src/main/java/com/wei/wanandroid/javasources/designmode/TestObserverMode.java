@@ -17,5 +17,12 @@ public class TestObserverMode
 
         teacherSubject.detach(studentObserver);
         teacherSubject.notify("这次作业小明不用做！");
+
+
+//        for (;;)
+//        while (true)
+        {  // 死循环,效果一致
+            System.out.println("for recycle");
+        }
     }
 }

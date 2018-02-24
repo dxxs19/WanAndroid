@@ -21,6 +21,7 @@ public class ToastUtils {
         message.what = 1;
         message.arg1 = period;
         message.obj = msg;
+        // 实际上是调用 sendMessageAtTime()
         tipsHandler.sendMessage(message);
     }
 

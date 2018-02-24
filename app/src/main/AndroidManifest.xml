@@ -51,9 +51,11 @@
     <uses-permission android:name="com.miui.yellowpage.permission.ACCESS_YELLOWPAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE"/>
+
     <uses-feature android:name="android.hardware.camera"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
     <uses-feature android:name="android.hardware.telephony"/>
+
     <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
     <uses-permission android:name="com.cootek.smartdialer.permission.MIPUSH_RECEIVE"/>
@@ -66,6 +68,7 @@
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"/>
     <uses-permission android:name="android.permission.ACCESS_DOWNLOAD_MANAGER"/>
+
     <application
         android:name=".WanApplication"
         android:allowBackup="true"
@@ -117,11 +120,8 @@
             <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
             <!-- </intent-filter> -->
         </activity>
-
         <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -156,7 +156,6 @@
             android:enabled="true"
             android:exported="true"
             android:process=":myreceiver">
-
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <action android:name="android.intent.action.BATTERY_LOW"/>
@@ -183,9 +182,15 @@
                 <action android:name="android.intent.action.PACKAGE_CHANGED"/>
                 <action android:name="android.intent.action.PACKAGE_REMOVED"/>
                 <action android:name="android.intent.action.PACKAGE_REPLACED"/>
+
                 <data android:scheme="package"/>
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".service.MyIntentService"
+            android:exported="false">
+        </service>
     </application>
 
 </manifest>

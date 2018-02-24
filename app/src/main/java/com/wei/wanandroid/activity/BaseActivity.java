@@ -55,15 +55,21 @@ public abstract class BaseActivity extends AppCompatActivity implements IRequest
     }
 
     @Override
+    protected void onRestart() {
+        Log.e(TAG, "onRestart");
+        super.onRestart();
+    }
+
+    @Override
     protected void onStart() {
         Log.e(TAG, "onStart");
         super.onStart();
     }
 
     @Override
-    protected void onRestart() {
-        Log.e(TAG, "onRestart");
-        super.onRestart();
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        Log.e(TAG, "onRestoreInstanceState");
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
@@ -76,6 +82,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IRequest
     protected void onPause() {
         Log.e(TAG, "onPause");
         super.onPause();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        Log.e(TAG, "onSaveInstanceState");
+        super.onSaveInstanceState(outState);
     }
 
     @Override

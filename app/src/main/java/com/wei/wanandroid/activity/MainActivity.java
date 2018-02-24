@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
@@ -71,7 +74,6 @@ public class MainActivity extends BaseActivity
 //                "&content=this is a test notification."));
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        String intentUri = intent.toUri(Intent.URI_INTENT_SCHEME);
-
     }
 
     @Override
@@ -219,11 +221,18 @@ public class MainActivity extends BaseActivity
             case R.id.action_about_us:
                 Log.e(TAG, item.getTitle() + "");
 //                startActivity(new Intent(this, RecyclerViewActivity.class));
-                showDialog();
+                Message message = new Message();
+                message.obj = System.currentTimeMillis();
+                if (mHandler == null)
+                {
+                    mHandler = new MyHandler();
+                }
+                mHandler.sendMessage(message);
                 break;
 
             case Menu.FIRST + 1:
                 Log.e(TAG, "最后添加的菜单");
+                new LooperThread().start();
                 break;
 
             default:
@@ -231,12 +240,33 @@ public class MainActivity extends BaseActivity
         return true;
     }
 
-    private void showDialog()
+    // ****************************************** 单线程模型中Message、Handler、MessageQueue、Looper之间的关系 start ******************************************//
+//   1. new LooperThread().start();
+//   2. mHandler.sendMessage(message);
+    static class MyHandler extends Handler
     {
-        Dialog dialog = new AlertDialog.Builder(this)
-                .setTitle("测试对话框")
-                .show();
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Log.e("MainActivity", "收到消息 ：" + msg.obj + "");
+        }
     }
+
+    MyHandler mHandler;
+    class LooperThread extends Thread
+    {
+        @Override
+        public void run() {
+            // 初始化一个Looper，放到 ThreadLocal 中，与线程绑定。主线程已经有Looper了，所以不需要这一行代码
+            Looper.prepare();
+            mHandler = new MyHandler();
+            // 先从 ThreadLocal 中拿到当前线程的Looper，然后 通过 Looper 拿到 MessageQueue ，接着循环地
+            // 从 MessageQueue 中拿到Message并通过dispatchMessage把Message分发出去。消息最终在Handler的
+            // 回调方法 handleMessage 中执行。
+            Looper.loop();
+        }
+    }
+    // ****************************************** 单线程模型中Message、Handler、MessageQueue、Looper之间的关系 end ******************************************//
 
     public void setPermission(View view)
     {

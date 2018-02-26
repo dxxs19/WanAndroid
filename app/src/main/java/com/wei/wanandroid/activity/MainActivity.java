@@ -44,6 +44,10 @@ import com.wei.wanandroid.service.KeepAliveService;
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.widgets.CusImgView;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Vector;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -74,6 +78,11 @@ public class MainActivity extends BaseActivity
 //                "&content=this is a test notification."));
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //        String intentUri = intent.toUri(Intent.URI_INTENT_SCHEME);
+
+        // 三者区别
+        ArrayList arrayList = new ArrayList();
+        LinkedList linkedList = new LinkedList();
+        Vector vector = new Vector();
     }
 
     @Override

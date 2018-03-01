@@ -1,24 +1,25 @@
 package com.wei.wanandroid.javasources.thread;
 
+import android.support.annotation.NonNull;
+
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @author: WEI
  * @date: 2018/2/26
  */
-
 public class ThreadPoolTest
 {
     public static void main(String[] args) {
-        testScheduledThreadPool();
-        testSingleThreadPool();
-        testCacheThreadPool();
+//        testScheduledThreadPool();
+//        testSingleThreadPool();
+//        testCacheThreadPool();
         testFixedThreadPool();
     }
 
@@ -82,7 +83,14 @@ public class ThreadPoolTest
      */
     private static void testCacheThreadPool()
     {
-        ExecutorService executorService = Executors.newCachedThreadPool();
+        ExecutorService executorService = Executors.newCachedThreadPool(
+//                new ThreadFactory() {
+//            @Override
+//            public Thread newThread(@NonNull Runnable r) {
+//                return new Thread(r, "cachedthreadpool-" + r.hashCode());
+//            }
+//        }
+        );
         distributeTaskForThreadPool(executorService);
     }
 
@@ -91,7 +99,7 @@ public class ThreadPoolTest
      */
     private static void testFixedThreadPool()
     {
-        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
         distributeTaskForThreadPool(executorService);
     }
 

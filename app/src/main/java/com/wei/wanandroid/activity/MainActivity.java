@@ -39,6 +39,7 @@ import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.imagepipeline.request.Postprocessor;
 import com.wei.utillibrary.FileUtil;
+import com.wei.wanandroid.controller.AIDLController;
 import com.wei.wanandroid.service.JobHandlerService;
 import com.wei.wanandroid.service.KeepAliveService;
 import com.wei.wanandroid.R;
@@ -83,6 +84,8 @@ public class MainActivity extends BaseActivity
         ArrayList arrayList = new ArrayList();
         LinkedList linkedList = new LinkedList();
         Vector vector = new Vector();
+
+//        AIDLController.invokeAIDL(this);
     }
 
     @Override

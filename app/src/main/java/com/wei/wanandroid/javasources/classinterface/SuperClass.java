@@ -8,6 +8,8 @@ package com.wei.wanandroid.javasources.classinterface;
 
 public class SuperClass
 {
+    protected int a = 100;
+
     public SuperClass()
     {
         System.out.println("父类无参构造方法初始化！");

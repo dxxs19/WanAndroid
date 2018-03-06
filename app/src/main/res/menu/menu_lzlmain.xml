@@ -4,27 +4,27 @@
       tools:context=".LZLMainActivity">
 
     <item
-        android:id="@+id/action_about_us"
-        android:showAsAction="never"
-        android:title="@string/main_about_us"/>
+        android:id="@+id/action_fresco"
+        app:showAsAction="never"
+        android:title="跳转到FrescoActivity"/>
     <item
-        android:id="@+id/action_helper"
-        android:showAsAction="never"
-        android:title="@string/main_helper"/>
+        android:id="@+id/action_jni"
+        app:showAsAction="never"
+        android:title="跳转到JNIActivity"/>
     <item
         android:id="@+id/action_deviceid"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/main_getdeviceid"/>
     <item
         android:id="@+id/action_settings_notice"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/main_settings_notice"/>
     <item
         android:id="@+id/action_clear_tips"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/main_clear_tips"/>
     <item
         android:id="@+id/action_third_push_activity"
-        android:showAsAction="never"
+        app:showAsAction="never"
         android:title="@string/main_third_push_activity"/>
 </menu>

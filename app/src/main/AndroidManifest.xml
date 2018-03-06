@@ -83,42 +83,10 @@
         <meta-data
             android:name="com.alibaba.app.appsecret"
             android:value="7c2d2bb4cb7c9453ea82e0cc90ec1030"/> <!-- 请填写你自己的appSecret -->
-        <!-- <activity android:name=".activity.MainActivity"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MAIN"/> -->
-
-
-        <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-        <!-- </intent-filter> -->
-        <!-- </activity> -->
-        <activity android:name=".http.OkHttp3Activity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN"/> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity android:name=".permission.RuntimePermissionActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN"/> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity android:name=".image.FrescoActivity"/>
-        <activity android:name=".activity.RecyclerViewActivity">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN"/> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
-            <!-- </intent-filter> -->
-        </activity>
+        <activity android:name=".activity.http.OkHttp3Activity"/>
+        <activity android:name=".activity.permission.RuntimePermissionActivity"/>
+        <activity android:name=".activity.image.FrescoActivity"/>
+        <activity android:name=".activity.RecyclerViewActivity"/>
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -189,9 +157,12 @@
         <service android:name=".service.AIDLService">
             <intent-filter>
                 <action android:name="com.wei.wanandroid.CALC_AIDL"/>
+
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </service>
+
+        <activity android:name=".activity.ndk.JNIActivity"/>
     </application>
 
 </manifest>

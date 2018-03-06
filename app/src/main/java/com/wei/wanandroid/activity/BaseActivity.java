@@ -1,6 +1,5 @@
 package com.wei.wanandroid.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.wei.utillibrary.ToastUtils;
-import com.wei.wanandroid.http.IRequestCallBacked;
+import com.wei.wanandroid.activity.http.IRequestCallBacked;
 
 import java.io.File;
 import java.io.IOException;

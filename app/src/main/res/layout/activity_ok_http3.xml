@@ -5,6 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.wei.wanandroid.http.OkHttp3Activity">
+    tools:context="com.wei.wanandroid.activity.http.OkHttp3Activity">
 
 </android.support.constraint.ConstraintLayout>

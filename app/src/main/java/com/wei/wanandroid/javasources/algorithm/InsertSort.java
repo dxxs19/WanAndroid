@@ -15,8 +15,24 @@ public class InsertSort extends BaseALG
         InsertSort insertSort = new InsertSort();
         insertSort.printArray(a);
 //        insertSort.insert(a);
-        insertSort.shellSort(a);
+//        insertSort.shellSort(a);
+        insertSort.insertTest(a);
         insertSort.printArray(a);
+    }
+
+    private void insertTest(int[] a) {
+        int len = a.length, i, j, temp;
+        for ( i = 1; i < len; i ++)
+        {
+            temp = a[i];
+            j = i - 1;
+            while (j >= 0 && a[j] > temp)
+            {
+                a[j+1] = a[j];
+                j --;
+            }
+            a[j+1] = temp;
+        }
     }
 
     /**

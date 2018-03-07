@@ -3,6 +3,7 @@ package com.wei.wanandroid.activity.ndk;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.BaseActivity;
@@ -16,9 +17,12 @@ public class JNIActivity extends BaseActivity {
     }
 
     @Override
-    public void initView() {
+    public void initView()
+    {
         String code = getAppID();
         Log.e(TAG, "code : " + code);
+        setAppID("999999999");
+        invokeSuperClassMethodShowMsg();
     }
 
     static {
@@ -29,5 +33,14 @@ public class JNIActivity extends BaseActivity {
     private void invokedByNative(String msg)
     {
         Log.e(TAG, "底层回调信息 ： " + msg);
+        showMsg(msg, Toast.LENGTH_LONG);
     }
+
+    private static native String setAppID(String id);
+    private static void changeId(String id)
+    {
+        Log.e(JNIActivity.class.getSimpleName(), "id 变成了 : " + id);
+    }
+
+    private native String invokeSuperClassMethodShowMsg();
 }

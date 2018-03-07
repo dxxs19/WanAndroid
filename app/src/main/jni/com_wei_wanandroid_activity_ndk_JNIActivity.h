@@ -15,6 +15,22 @@ extern "C" {
 JNIEXPORT jstring JNICALL Java_com_wei_wanandroid_activity_ndk_JNIActivity_getAppID
   (JNIEnv *, jobject);
 
+/*
+ * Class:     com_wei_wanandroid_activity_ndk_JNIActivity
+ * Method:    setAppID
+ * Signature: (Ljava/lang/String;)Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_wei_wanandroid_activity_ndk_JNIActivity_setAppID
+  (JNIEnv *, jclass, jstring);
+
+/*
+ * Class:     com_wei_wanandroid_activity_ndk_JNIActivity
+ * Method:    invokeSuperClassMethodShowMsg
+ * Signature: ()Ljava/lang/String;
+ */
+JNIEXPORT jstring JNICALL Java_com_wei_wanandroid_activity_ndk_JNIActivity_invokeSuperClassMethodShowMsg
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif

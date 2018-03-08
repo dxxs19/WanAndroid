@@ -1,6 +1,8 @@
 package com.wei.wanandroid.activity;
 
+import android.app.Service;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -16,6 +18,7 @@ import com.wei.utillibrary.FileUtil;
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.image.FrescoActivity;
 import com.wei.wanandroid.activity.ndk.JNIActivity;
+import com.wei.wanandroid.service.MyService;
 import com.wei.wanandroid.widgets.CusImgView;
 
 import java.util.ArrayList;

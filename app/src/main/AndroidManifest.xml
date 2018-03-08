@@ -163,6 +163,12 @@
         </service>
 
         <activity android:name=".activity.ndk.JNIActivity"/>
+
+        <service
+            android:name=".service.MyService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>

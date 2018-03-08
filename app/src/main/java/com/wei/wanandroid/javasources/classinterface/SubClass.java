@@ -1,5 +1,7 @@
 package com.wei.wanandroid.javasources.classinterface;
 
+import java.lang.reflect.Method;
+
 /**
  * 子类无条件的继承父类的无参构造方法；
  * 子类可以引用父类中的有参构造方法，使用super关键字；如果没有super关键字，则会先引用父类中的无参构造方法，再调用自己的有参构造方法

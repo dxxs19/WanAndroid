@@ -1,3 +1,9 @@
-V1ǩ���İ���Android 7.0 ���»������ֻ�����������װ��
-V2ǩ���İ���Android 7.0 �����ֻ���װʧ�ܣ���7.0+�ֻ��ϰ�װ�ɹ���
-V1+V2ǩ���İ����κΰ汾�ֻ��϶���������װ��
+V1签名的包在Android 7.0 以下或以上手机都能正常安装；
+V2签名的包在Android 7.0 以下手机安装失败，在7.0+手机上安装成功；
+V1+V2签名的包在任何版本手机上都能正常安装。
+
+Signature Version安卓项目打包时的两种签名方式：
+V1（Jar Signature）: 传统通用方式。来自JDK。
+V2（Full APK Signature）: Android 7.0 引入的新方式。安装更快、验证方式更安全。不适用于旧安卓版本，且不强制。完整信息可参考——
+https://developer.android.google.cn/about/versions/nougat/android-7.0.html#apk_signature_v2 
+所以为了追求更完美的发挥，应将两个勾同时勾上。若不勾选V1，则旧安卓版本无法安装；若不勾选V2，则对于Android7.0设备就舍弃了更快更安全的方式。

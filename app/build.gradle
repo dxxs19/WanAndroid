@@ -6,8 +6,8 @@ android {
         applicationId "com.wei.wanandroid"
         minSdkVersion 14
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
 //        ndk {
@@ -80,10 +80,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-    compile 'com.j256.ormlite:ormlite-core:4.48'
-    compile 'com.j256.ormlite:ormlite-android:4.48'
-//    compile 'com.aliyun.ams:alicloud-android-push:3.0.11@aar'
-//    compile 'com.aliyun.ams:alicloud-android-utdid:1.1.5.3'
-//    compile 'com.aliyun.ams:alicloud-android-ut:5.1.0'
-    compile 'com.aliyun.ams:alicloud-android-third-push:3.0.5@aar'
+    compile 'com.aliyun.ams:alicloud-android-hotfix:3.2.0'
 }

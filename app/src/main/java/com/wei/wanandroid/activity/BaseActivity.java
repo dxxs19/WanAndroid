@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.taobao.sophix.SophixManager;
 import com.wei.utillibrary.ToastUtils;
 import com.wei.wanandroid.activity.http.IRequestCallBacked;
 
@@ -75,6 +76,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IRequest
     protected void onResume() {
         Log.e(TAG, "onResume");
         super.onResume();
+        SophixManager.getInstance().queryAndLoadNewPatch();
     }
 
     @Override

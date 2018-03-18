@@ -1,8 +1,10 @@
 package com.wei.wanandroid;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
+//import com.didi.virtualapk.PluginManager;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.taobao.sophix.PatchStatus;
 import com.taobao.sophix.SophixManager;
@@ -22,6 +24,12 @@ public class WanApplication extends Application
 
     public static MsgDisplayListener msgDisplayListener = null;
     public static StringBuilder cacheMsg = new StringBuilder();
+//
+//    @Override
+//    protected void attachBaseContext(Context base) {
+//        super.attachBaseContext(base);
+//        PluginManager.getInstance(base).init();
+//    }
 
     @Override
     public void onCreate() {

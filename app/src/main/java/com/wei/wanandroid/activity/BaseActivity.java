@@ -3,6 +3,7 @@ package com.wei.wanandroid.activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -167,5 +168,17 @@ public abstract class BaseActivity extends AppCompatActivity implements IRequest
     {
         void onFailure(Call call, IOException e);
         void onResponse(Call call, Response response) throws IOException;
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Log.e(TAG, "--- dispatchTouchEvent ---");
+        return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        Log.e(TAG, "--- onTouchEvent ---");
+        return super.onTouchEvent(event);
     }
 }

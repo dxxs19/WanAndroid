@@ -83,6 +83,12 @@ public class CusImgView extends android.support.v7.widget.AppCompatImageView
     }
 
     @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        Log.e(TAG, "--- dispatchTouchEvent ---");
+        return super.dispatchTouchEvent(event);
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         float x = event.getX();
         float y = event.getY();
@@ -148,7 +154,8 @@ public class CusImgView extends android.support.v7.widget.AppCompatImageView
             default:
                 break;
         }
-        return true;
+        Log.e(TAG, "--- onTouchEvent ---");
+        return super.onTouchEvent(event);
     }
 
     @Override

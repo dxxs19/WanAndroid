@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -51,6 +52,8 @@ public class MainActivity extends BaseActivity
         Vector vector = new Vector();
 
 //        AIDLController.invokeAIDL(this);
+//        startService()
+//        registerReceiver()
     }
 
     @Override
@@ -155,4 +158,5 @@ public class MainActivity extends BaseActivity
         FileUtil.saveFile("hello , this is a test !");
         FileUtil.saveFile("I love beautyleg !");
     }
+
 }

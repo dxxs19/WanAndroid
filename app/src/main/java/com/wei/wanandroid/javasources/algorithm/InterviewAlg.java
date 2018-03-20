@@ -1,6 +1,7 @@
 package com.wei.wanandroid.javasources.algorithm;
 
 /**
+ * 面试时遇到的算法
  * @author: WEI
  * @date: 2018/3/19
  */
@@ -36,6 +37,10 @@ public class InterviewAlg extends BaseALG
         System.out.println("去空格后 ：" + resultStr);
     }
 
+    /**
+     * 用java的api去掉字符串空格
+     * @param str
+     */
     private void deleteSpaceWithApi(String str)
     {
         System.out.println("去空格后 ：" + str.replaceAll(" ", ""));

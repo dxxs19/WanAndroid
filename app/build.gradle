@@ -20,7 +20,7 @@ android {
             cmake {
                 cppFlags ""
                 //生成多个版本的so文件
-                abiFilters 'armeabi', 'arm64-v8a','armeabi-v7a','x86','x86_64'
+                abiFilters 'armeabi', 'arm64-v8a', 'armeabi-v7a', 'x86', 'x86_64'
             }
         }
     }
@@ -82,4 +82,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.aliyun.ams:alicloud-android-hotfix:3.2.0'
     //    compile 'com.didi.virtualapk:core:0.9.1'
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
 }

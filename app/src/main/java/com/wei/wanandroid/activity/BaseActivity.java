@@ -1,6 +1,7 @@
 package com.wei.wanandroid.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -29,6 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IRequest
 {
     protected String TAG = getClass().getSimpleName();
     private OkHttpClient mOkHttpClient;
+    protected Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +131,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IRequest
     protected void requestCall(Request request)
     {
         File sdcache = getExternalCacheDir();
+        Log.e(TAG, "cache path : " + sdcache.getAbsolutePath());
         int cacheSize = 10 * 1024 * 1024;
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
                 .connectTimeout(15, TimeUnit.SECONDS)

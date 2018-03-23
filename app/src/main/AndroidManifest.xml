@@ -77,24 +77,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--<meta-data-->
-            <!--android:name="com.alibaba.app.appkey"-->
-            <!--android:value="24738810"/> &lt;!&ndash; 请填写你自己的- appKey &ndash;&gt;-->
-        <!--<meta-data-->
-            <!--android:name="com.alibaba.app.appsecret"-->
-            <!--android:value="7c2d2bb4cb7c9453ea82e0cc90ec1030"/> &lt;!&ndash; 请填写你自己的appSecret &ndash;&gt;-->
+
+        <!-- <meta-data -->
+        <!-- android:name="com.alibaba.app.appkey" -->
+        <!-- android:value="24738810"/> &lt;!&ndash; 请填写你自己的- appKey &ndash;&gt; -->
+        <!-- <meta-data -->
+        <!-- android:name="com.alibaba.app.appsecret" -->
+        <!-- android:value="7c2d2bb4cb7c9453ea82e0cc90ec1030"/> &lt;!&ndash; 请填写你自己的appSecret &ndash;&gt; -->
 
         <meta-data
             android:name="com.taobao.android.hotfix.IDSECRET"
-            android:value="24738810-1" />
+            android:value="24738810-1"/>
         <meta-data
             android:name="com.taobao.android.hotfix.APPSECRET"
-            android:value="7c2d2bb4cb7c9453ea82e0cc90ec1030" />
+            android:value="7c2d2bb4cb7c9453ea82e0cc90ec1030"/>
         <meta-data
             android:name="com.taobao.android.hotfix.RSASECRET"
-            android:value="@string/hotfix_rsa" />
+            android:value="@string/hotfix_rsa"/>
 
-        <activity android:name=".activity.http.OkHttp3Activity"/>
+        <activity
+            android:name=".activity.http.OkHttp3Activity"
+            android:launchMode="singleTask"/>
         <activity android:name=".activity.permission.RuntimePermissionActivity"/>
         <activity android:name=".activity.image.FrescoActivity"/>
         <activity android:name=".activity.RecyclerViewActivity"/>
@@ -180,6 +183,19 @@
             android:enabled="true"
             android:exported="true">
         </service>
+
+        <receiver
+            android:name=".receiver.NetworkStatusReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".activity.image.GlideActivity">
+        </activity>
     </application>
 
 </manifest>

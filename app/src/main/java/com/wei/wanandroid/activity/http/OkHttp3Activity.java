@@ -1,10 +1,15 @@
 package com.wei.wanandroid.activity.http;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.wei.wanandroid.activity.BaseActivity;
 import com.wei.wanandroid.R;
+import com.wei.wanandroid.service.MyService;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,10 +29,14 @@ import okhttp3.Response;
  */
 public class OkHttp3Activity extends BaseActivity
 {
+    private final String imgUrl = "http://img.my.csdn.net/uploads/201603/26/1458988468_5804.jpg";
+    ImageView mImageView ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ok_http3);
+        startService(new Intent(this, MyService.class));
     }
 
     @Override
@@ -35,7 +44,23 @@ public class OkHttp3Activity extends BaseActivity
         //        getAsynHttp();
 //        postAsynHttp();
 //        downAsynFile();
-        uploadMultipart();
+//        uploadMultipart();
+        mImageView = findViewById(R.id.imgView);
+        showPic(imgUrl);
+//        mHandler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                startActivity(new Intent(OkHttp3Activity.this, OkHttp3Activity.class));
+//            }
+//        }, 5000);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.e(TAG, "--- onNewIntent ---");
+        String url = "http://g.hiphotos.baidu.com/zhidao/pic/item/1e30e924b899a901da2aece318950a7b0308f5cc.jpg";
+        showPic(url);
     }
 
     /**
@@ -152,6 +177,33 @@ public class OkHttp3Activity extends BaseActivity
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Log.e(TAG, "onResponse : " + response.body().string());
+            }
+        });
+        requestCall(request);
+    }
+
+    private void showPic(String url)
+    {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        setRequestCallBack(new RequestCallBack() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.e(TAG, "请求失败：" + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException
+            {
+                final byte[] bytes = response.body().bytes();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Bitmap bitmap = BitmapFactory.decodeByteArray( bytes, 0, bytes.length);
+                        mImageView.setImageBitmap(bitmap);
+                    }
+                });
             }
         });
         requestCall(request);

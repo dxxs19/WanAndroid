@@ -20,23 +20,24 @@ public class MyService extends Service
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (i < 100)
-                {
-                    Log.e(TAG, "i = " + i);
-                    i ++;
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }).start();
+        new Thread(mRunnable).start();
         return START_STICKY;
     }
+
+    Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            while (true)
+            {
+                Log.e(TAG, "" + System.currentTimeMillis());
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
 
     @Override
     public void onDestroy() {

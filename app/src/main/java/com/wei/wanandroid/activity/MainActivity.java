@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.taobao.sophix.SophixManager;
 import com.wei.utillibrary.FileUtil;
 import com.wei.wanandroid.R;
+import com.wei.wanandroid.activity.http.OkHttp3Activity;
 import com.wei.wanandroid.activity.image.FrescoActivity;
 import com.wei.wanandroid.activity.ndk.JNIActivity;
 import com.wei.wanandroid.service.MyService;
@@ -70,8 +71,6 @@ public class MainActivity extends BaseActivity
         TextUtils.equals(null, null);
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.e(TAG, "onCreateOptionsMenu");
@@ -108,6 +107,10 @@ public class MainActivity extends BaseActivity
 
             case R.id.action_jni:
                 startActivity(new Intent(this, JNIActivity.class));
+                break;
+
+            case R.id.action_deviceid:
+                startActivity(new Intent(this, OkHttp3Activity.class));
                 break;
 
             case Menu.FIRST + 1:

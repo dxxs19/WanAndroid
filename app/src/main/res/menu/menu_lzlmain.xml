@@ -18,7 +18,7 @@
     <item
         android:id="@+id/action_settings_notice"
         app:showAsAction="never"
-        android:title="@string/main_settings_notice"/>
+        android:title="跳转到GlideActivity"/>
     <item
         android:id="@+id/action_clear_tips"
         app:showAsAction="never"

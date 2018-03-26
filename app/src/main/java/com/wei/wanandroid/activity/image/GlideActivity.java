@@ -11,7 +11,8 @@ import com.wei.wanandroid.activity.BaseActivity;
 public class GlideActivity extends BaseActivity
 {
     ImageView mImageView ;
-    String url = "http://p1.pstatp.com/large/166200019850062839d3";
+    String gifUrl = "http://p1.pstatp.com/large/166200019850062839d3";
+    String beautyUrl = "https://gd4.alicdn.com/imgextra/i2/1066012351/TB2XW4DcMaTBuNjSszfXXXgfpXa_!!1066012351.jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +25,11 @@ public class GlideActivity extends BaseActivity
         mImageView = findViewById(R.id.imgView);
     }
 
-    void showImage(View view)
+    public void showImage(View view)
     {
-        Glide.with(this).load(url).into(mImageView);
+        Glide.with(this)
+                .load(gifUrl)
+//                .load(beautyUrl)
+                .into(mImageView);
     }
 }

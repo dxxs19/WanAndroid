@@ -1,10 +1,7 @@
-package com.wei.wanandroid.javasources.designmode;
+package com.wei.wanandroid.javasources.designpatterns;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 
 /**
  * @author: WEI

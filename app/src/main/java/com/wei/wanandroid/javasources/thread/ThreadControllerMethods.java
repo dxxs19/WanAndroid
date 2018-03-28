@@ -3,6 +3,9 @@ package com.wei.wanandroid.javasources.thread;
 /**
  * 控制线程的方法(实现线程调度)
  * sleep, setPriority, yield, join, setDaemon
+ * yield和join方法的使用
+ * join方法用线程对象调用，如果在一个线程A中调用另一个线程B的join方法，线程A将会等待线程B执行完毕后再执行。
+ * yield可以直接用Thread类调用，yield让出CPU执行权给同等级或者更高级别的线程，如果没有相应级别的线程在等待CPU的执行权，则该线程继续执行。
  * @author: WEI
  * @date: 2018/3/26
  */

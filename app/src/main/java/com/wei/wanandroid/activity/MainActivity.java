@@ -23,6 +23,7 @@ import com.wei.wanandroid.activity.http.OkHttp3Activity;
 import com.wei.wanandroid.activity.image.FrescoActivity;
 import com.wei.wanandroid.activity.image.GlideActivity;
 import com.wei.wanandroid.activity.ndk.JNIActivity;
+import com.wei.wanandroid.activity.rx.RxJavaActivity;
 import com.wei.wanandroid.service.MyService;
 import com.wei.wanandroid.widgets.CusImgView;
 
@@ -116,6 +117,10 @@ public class MainActivity extends BaseActivity
 
             case R.id.action_settings_notice:
                 startActivity(new Intent(this, GlideActivity.class));
+                break;
+
+            case R.id.action_rxjava:
+                startActivity(new Intent(this, RxJavaActivity.class));
                 break;
 
             case Menu.FIRST + 1:

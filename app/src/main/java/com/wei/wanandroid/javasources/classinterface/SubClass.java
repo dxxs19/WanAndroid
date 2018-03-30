@@ -13,6 +13,7 @@ import java.lang.reflect.Method;
 
 public class SubClass extends SuperClass
 {
+    protected int a = 25;
 
     public static void main(String[] args) {
         SubClass cls1 = new SubClass();
@@ -20,6 +21,9 @@ public class SubClass extends SuperClass
         SubClass cls2 = new SubClass("");
         System.out.println("---------------------------");
         cls1.finalMethodTest();
+
+        SuperClass superClass = new SubClass();
+        System.out.println(superClass.a);
     }
 
     /**

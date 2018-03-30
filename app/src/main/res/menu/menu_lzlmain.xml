@@ -20,9 +20,9 @@
         app:showAsAction="never"
         android:title="跳转到GlideActivity"/>
     <item
-        android:id="@+id/action_clear_tips"
+        android:id="@+id/action_rxjava"
         app:showAsAction="never"
-        android:title="@string/main_clear_tips"/>
+        android:title="跳转到RxJavaActivity"/>
     <item
         android:id="@+id/action_third_push_activity"
         app:showAsAction="never"

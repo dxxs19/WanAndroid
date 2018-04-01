@@ -2,6 +2,7 @@ package com.wei.wanandroid.activity;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -57,6 +58,10 @@ public class MainActivity extends BaseActivity
 //        AIDLController.invokeAIDL(this);
 //        startService()
 //        registerReceiver()
+        SharedPreferences sharedPreferences = getSharedPreferences("", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("key", "value");
+        editor.commit();
     }
 
     @Override

@@ -55,18 +55,23 @@ public class RxJavaActivity extends BaseActivity {
             @Override
             public ObservableSource<String> apply(Integer integer) throws Exception {
                 List list = new ArrayList();
-                for (int i = 0; i < 3; i ++)
-                {
-                    list.add("I'm value " + integer);
-                }
+                list.add("I'm value " + integer);
+                Log.e(TAG, " flatMap -> apply() " + integer);
                 return Observable.fromIterable(list);
             }
-        }).subscribe(new Consumer<String>() {
+        }).doOnNext(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
-                Log.e(TAG, "subscribe -> accept() " + s);
+                Log.e(TAG, " doOnNext -> accept() " + s);
             }
-        });
+        }).subscribe(mObserver);
+//                .subscribe(new Consumer<String>() {
+//            @Override
+//            public void accept(String s) throws Exception {
+//                Log.e(TAG, "subscribe -> accept() " + s);
+//                showResult(s);
+//            }
+//        });
 
     }
 

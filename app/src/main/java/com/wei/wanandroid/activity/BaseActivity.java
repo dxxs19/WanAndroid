@@ -8,8 +8,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.leakcanary.RefWatcher;
 import com.taobao.sophix.SophixManager;
 import com.wei.utillibrary.ToastUtils;
+import com.wei.wanandroid.WanApplication;
 import com.wei.wanandroid.activity.http.IRequestCallBacked;
 
 import java.io.File;
@@ -104,6 +106,8 @@ public abstract class BaseActivity extends AppCompatActivity implements IRequest
     protected void onDestroy() {
         Log.e(TAG, "onDestroy");
         super.onDestroy();
+        RefWatcher refWatcher = WanApplication.getRefWatcher(this);
+        refWatcher.watch(this);
     }
 
     public abstract void initView();

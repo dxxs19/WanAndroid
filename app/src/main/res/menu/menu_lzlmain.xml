@@ -24,7 +24,7 @@
         app:showAsAction="never"
         android:title="跳转到RxJavaActivity"/>
     <item
-        android:id="@+id/action_third_push_activity"
+        android:id="@+id/action_leak"
         app:showAsAction="never"
-        android:title="@string/main_third_push_activity"/>
+        android:title="跳转到LeakCanaryActivity"/>
 </menu>

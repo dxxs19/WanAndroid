@@ -36,7 +36,8 @@ public class OkHttp3Activity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ok_http3);
-        startService(new Intent(this, MyService.class));
+//        startService(new Intent(this, MyService.class));
+
     }
 
     @Override

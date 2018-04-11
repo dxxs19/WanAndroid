@@ -3,6 +3,7 @@ package com.wei.wanandroid.activity;
 import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -63,6 +64,7 @@ public class MainActivity extends BaseActivity
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("key", "value");
         editor.commit();
+
     }
 
     @Override
@@ -180,6 +182,14 @@ public class MainActivity extends BaseActivity
 
         FileUtil.saveFile("hello , this is a test !");
         FileUtil.saveFile("I love beautyleg !");
+
+        AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+        int currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+        int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (int) (maxVolume*0.8), 0);
+        Log.e(TAG, "currentVolume : " + currentVolume + ", maxVolume : " + maxVolume + ", 80% * maxVolume : " + maxVolume * 0.8);
+//        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0);
+//        Log.e(TAG, "currentVolume : " + currentVolume);
     }
 
 }

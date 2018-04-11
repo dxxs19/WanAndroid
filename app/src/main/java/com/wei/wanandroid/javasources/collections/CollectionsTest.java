@@ -1,4 +1,4 @@
-package com.wei.wanandroid.javasources;
+package com.wei.wanandroid.javasources.collections;
 
 import android.text.TextUtils;
 

@@ -1,4 +1,4 @@
-package com.wei.wanandroid.javasources;
+package com.wei.wanandroid.javasources.io;
 
 import java.io.File;
 import java.io.FileInputStream;

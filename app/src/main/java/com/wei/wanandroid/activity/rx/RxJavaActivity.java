@@ -1,5 +1,6 @@
 package com.wei.wanandroid.activity.rx;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -30,15 +31,18 @@ public class RxJavaActivity extends BaseActivity {
         MyHandler myHandler = new MyHandler(this);
         Message message = myHandler.obtainMessage();
         message.obj = "I love beauty!";
-        myHandler.sendMessage(message);
+        myHandler.sendMessageDelayed(message, 360*1000);
     }
 
     static class MyHandler extends Handler
     {
-        SoftReference<RxJavaActivity> softReference;
+//        SoftReference<RxJavaActivity> softReference;
+        Context mContext;
 
         public MyHandler(RxJavaActivity context) {
-            softReference = new SoftReference<>(context);
+            // 一定要是强引用才能导致内存泄露，软引用等不会引起内存泄露或者说不会被leakcanary监测到
+//            softReference = new SoftReference<>(context);
+            mContext = context;
         }
 
         @Override
@@ -50,8 +54,8 @@ public class RxJavaActivity extends BaseActivity {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            RxJavaActivity context = softReference.get();
-            Log.e(RxJavaActivity.class.getSimpleName(), "context = " + context);
+//            RxJavaActivity context = softReference.get();
+            Log.e(RxJavaActivity.class.getSimpleName(), "mContext = " + mContext);
         }
     }
 

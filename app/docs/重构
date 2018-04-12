@@ -1,0 +1,24 @@
+第六单：重新组织函数
+    Extract Method ： 提炼函数。 症状：你有一段代码可以被组织在一起并独立出来。
+                                 处理：将这段代码放进一个独立函数中，并让函数名称解释该函数的用途。
+    Inline Method ：内联函数。 症状：一个函数的本体与名称同样清楚易懂。
+                               处理：在函数调用点插入函数本体，然后移除该函数。
+    Inline Temp ：内联临时变量。
+    Replace Temp with Query ：以查询取代临时变量
+    Introduce Explaining Variable ：引入解释性变量。通常可用Extract Method替代，除非用Extract Method工作量太大时，才考虑使用此方法；
+    Split Temporary Variable ：分解临时变量。
+    Remove Assignments to Parameters ：移除对参数的赋值
+    Replace Method with Method Object ：以函数对象取代函数
+    Substitute Algorithm ：替换算法
+
+第七单：在对象之间搬移特性
+    Move Method ：搬移函数。 症状：你的程序中，有个函数与其所驻类之外的另一个类进行更多交流：调用后者，或被后者调用。
+                             处理：在该函数最常引用的类中建立一个有着类似行为的新函数。将旧函数变成一个单纯的委托函数，或是将旧函数完全移除
+    Move Field ：搬移字段。  症状：你的程序中，某个字段被其所驻类之外的另一个类更多地用到。
+                             处理：在目标类新建一个字段，修改源字段的所有用户，令它们改用新的字段。
+    Extract Class ：提炼类。 症状：某个类做了应该由两个类做的事。
+                             处理：建立一个新类，将相关的字段和函数从旧类搬移到新类。
+    Inline Class ：将类内联化。 症状：某个类没有做太多事情。
+                                处理：将这个类的所有特性搬移到另一个类中，然后移除原类。
+    Hide Delegate ：隐藏“委托关系”。 症状：客户通过一个委托类来调用另一个对象。
+                                       处理：在服务类上建立客户所需的所有函数，用以隐藏委托关系。

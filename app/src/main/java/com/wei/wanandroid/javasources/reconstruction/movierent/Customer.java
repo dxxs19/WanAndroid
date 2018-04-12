@@ -68,6 +68,10 @@ public class Customer {
         return result;
     }
 
+    /**
+     * 计算积分
+     * @return
+     */
     private int getTotalFrequentRenterPoints()
     {
         int result = 0;
@@ -78,6 +82,7 @@ public class Customer {
         }
         return result;
     }
+
     /**
      * 计算总费用
      * @return

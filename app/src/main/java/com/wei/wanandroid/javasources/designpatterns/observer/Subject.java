@@ -1,6 +1,7 @@
 package com.wei.wanandroid.javasources.designpatterns.observer;
 
 /**
+ * 主题
  * @author: WEI
  * @date: 2018/3/28
  */

@@ -1,0 +1,176 @@
+一、模式定义
+
+简单工厂模式(Simple Factory Pattern)：又称为静态工厂方法(Static Factory Method)模式，它属于类创建型模式（同属于创建型模式的还有工厂方法模式，抽象工厂模式，单例模式，建造者模式）。在简单工厂模式中，可以根据参数的不同返回不同类的实例。简单工厂模式专门定义一个类来负责创建其他类的实例，被创建的实例通常都具有共同的父类。
+
+二、模式结构
+
+这里写图片描述
+
+从上图可以看出，简单工厂模式由三部分组成：具体工厂、具体产品和抽象产品。
+
+工厂类（Creator）角色：担任这个角色的是简单工厂模式的核心，含有与应用紧密相关的商业逻辑。工厂类在客户端的直接调用下创建产品对象，它往往由一个具体Java类实现。
+
+抽象产品（AbstractProduct）角色：担任这个角色的类是由简单工厂模式所创建的对象的父类，或它们共同拥有的接口。抽象产品角色可以用一个Java接口或者Java抽象类实现。
+
+具体产品（ConcreteProduct）角色：简单工厂模式所创建的任何对象都是这个角色的实例，具体产品角色由一个具体Java类实现。
+
+三、模式动机
+
+使用简单工厂模式可以将产品的“消费”和生产完全分开，客户端只需要知道自己需要什么产品，如何来使用产品就可以了，具体的产品生产任务由具体的工厂类来实现。工厂类根据传进来的参数生产具体的产品供消费者使用。这种模式使得更加利于扩展，当有新的产品加入时仅仅需要在工厂中加入新产品的构造就可以了。
+
+四、实例分析
+
+话说有一位土豪，他家有三辆汽车——Benz奔驰、Bmw宝马、Audi奥迪，还雇了司机为他开车。不过，土豪坐车时总是怪怪的：上Benz车后跟司机说“开奔驰车！”坐上Bmw后他说“开宝马车！”，坐上Audi说“开奥迪车！”。你一定说：这人有病！直接说开车不就行了？！ 而当把土豪的行为放到我们程序设计中来时，会发现这是一个普遍存在的现象。幸运的是，这种有病的现象在OO（面向对象）语言中可以避免了。下面就以Java语言为例来讲解一下如何避免这种问题。
+
+下面就是刚刚的故事所描述的场景，这段代码真的是有病啊。
+
+这个是Audi车的类，在这个类中有driveAudi的方法。
+
+package com.myfactory.pre1;
+
+public class Audi {
+
+    public Audi(){
+        System.out.println("Create a Audi");
+    }
+
+    public void driveAudi(){
+        System.out.println("Audi start engine");
+    }
+}
+这个是Benz车的类，在这个类中有driveBenz 的方法。
+
+package com.myfactory.pre1;
+
+public class Benz {
+
+    public Benz(){
+        System.out.println("Create a Benz");
+    }
+
+    public void driveBenz(){
+        System.out.println("Benz start engine");
+    }
+}
+这个是Bmw车的类，在这个类中有driveBmw 的方法。
+
+package com.myfactory.pre1;
+
+public class Bmw {
+
+    public Bmw(){
+        System.out.println("Create a Bmw");
+    }
+
+    public void driveBmw(){
+        System.out.println("Bmw start engine");
+    }
+}
+主程序调用刚刚创建的三辆车的类。
+
+package com.myfactory.pre1;
+
+public class Main {
+
+    public static void main(String[] args) {
+        //今天想做奥迪车
+        Audi audi = new Audi();
+        //开奥迪车
+        audi.driveAudi();
+    }
+}
+学过程序设计的人都能看出来上边这段代码的结构非常的不好。有两点，一是，不管是Audi，Benz还是Bmw，大家不都是车吗，为什么不直接创建一个Car的父类，然后让其他的汽车的子类来继承呢，二是，不管是什么车肯定都能开啊，干嘛要分那么清楚呢，直接在父类中写一个drive方法让子类来实现不就好了，如果每辆汽车都有自己名字命名的drive方法，那如果main中稍微写错一点程序就跑不起来了。
+
+所有针对以上的问题我们可以做如下的优化。
+
+创建了一个新的类Car，作为所有汽车的父类，定义了一个抽象的drive方法，具体的实现由子类来实现。
+
+package com.myfactory.pre2;
+
+public abstract class Car {
+    abstract void drive();
+}
+这是改进后的Audi类实现了父类的drive方法。
+
+package com.myfactory.pre2;
+
+public class Audi extends Car{
+
+    public Audi(){
+        System.out.println("Create a Audi");
+    }
+
+    public void drive(){
+        System.out.println("Audi start engine");
+    }
+}
+Benz和Bmw都是类似的，这里为了节约篇幅我就不再贴出来了，最后回复上完整的源码。
+
+这是改进后的新客户端：
+
+package com.myfactory.pre2;
+
+public class Main {
+
+    public static void main(String[] args) {
+        //今天想做奥迪车
+        Car car = new Audi();
+        //开车
+        car.drive();
+    }
+}
+这个方案看似完美但其实还是存在巨大的隐患。我提供对的实例是比较简单的，但实际应用中创建对象时可能不是一句话就能解决的事，比如创建奥迪车时需要发动机的型号，轮胎的大小，玻璃的尺寸，并且尺寸可能是由一系列复杂的运算计算出来的，所以如果把创建对象的任务放到客户端中，就是使客户端显得非常的臃肿，所以我们可以借助简单工厂模式进行改进。
+
+我们创建一个工厂类，这个工厂类专门负责建造各种汽车，代码如下：
+
+package com.myfactory.simplefactory;
+
+public class Driver {
+
+    public static Car getCar(String type) throws Exception{
+        if(type.equals("Benz")){
+            return new Benz();
+        }else if(type.equals("Audi")){
+            return new Audi();
+        }else if(type.equals("Bmw")){
+            return new Bmw();
+        }else{
+            throw new Exception();
+        }
+    }
+}
+
+package com.myfactory.simplefactory;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        //今天想做奥迪车
+        Car car = Driver.getCar("Audi");
+        //开车
+        car.drive();
+    }
+}
+我们看到，土豪不再需要自己new对象了，而是告诉Driver类今天我想要开什么车，Driver就会自动的将想要的汽车创建出来，然后土豪坐在车里只需要说开车就好了，这样不就符合我们的逻辑了吗。
+
+在上面的那个例子中，Driver类就是我们说的工厂，他用if-else语句来判断需要创建什么类型的对象（当然也可以使用switch语句），这就是我们一直说的简单工厂模式。
+
+五、模式优点
+
+工厂类含有必要的判断逻辑，可以决定在什么时候创建哪一个产品类的实例，客户端可以免除直接创建产品对象的责任，而仅仅“消费”产品；简单工厂模式通过这种做法实现了对责任的分割，它提供了专门的工厂类用于创建对象。
+客户端无须知道所创建的具体产品类的类名，只需要知道具体产品类所对应的参数即可，对于一些复杂的类名，通过简单工厂模式可以减少使用者的记忆量。
+通过引入配置文件，可以在不修改任何客户端代码的情况下更换和增加新的具体产品类，在一定程度上提高了系统的灵活性。
+当需要引入新的产品是不需要修改客户端的代码，只需要添加相应的产品类并修改工厂类就可以了，所以说从产品的角度上简单工厂模式是符合“开-闭”原则的。
+六、模式缺点
+
+由于工厂类集中了所有产品创建逻辑，工厂类一般被我们称作“全能类”或者“上帝类”，因为所有的产品创建他都能完成，这看似是好事，但仔细想想是有问题的。比如全国上下所有的事情都有国家主义一个人干会不会有问题，当然有！一旦不能正常工作，整个系统都要受到影响。
+使用简单工厂模式将会增加系统中类的个数，在一定程序上增加了系统的复杂度和理解难度。
+系统扩展困难，一旦添加新产品就不得不修改工厂逻辑，在产品类型较多时，有可能造成工厂逻辑过于复杂，不利于系统的扩展和维护。所以说从工厂的角度来说简单工厂模式是不符合“开-闭”原则的。
+简单工厂模式由于使用了静态工厂方法，造成工厂角色无法形成基于继承的等级结构。
+七、适用场景
+
+在以下情况下可以使用简单工厂模式：
+
+1、工厂类负责创建的对象比较少：由于创建的对象较少，不会造成工厂方法中的业务逻辑太过复杂。
+
+2、客户端只知道传入工厂类的参数，对于如何创建对象不关心：客户端既不需要关心创建细节，甚至连类名都不需要记住，只需要知道类型所对应的参数。

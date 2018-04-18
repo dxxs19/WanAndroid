@@ -1,9 +1,16 @@
 package com.wei.wanandroid.activity;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,6 +18,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.provider.Settings;
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -30,12 +38,15 @@ import com.wei.wanandroid.activity.rx.RxJavaActivity;
 import com.wei.wanandroid.service.MyService;
 import com.wei.wanandroid.widgets.CusImgView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Vector;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * @author Administrator
@@ -44,6 +55,7 @@ public class MainActivity extends BaseActivity
 {
     @BindView(R.id.imgView_move)
     CusImgView mMoveImgView;
+    MediaPlayer mediaPlayer = new MediaPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +63,72 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        initMediaPlayer();
+        testSharedPreferences();
+        testNotification();
+    }
 
-        // 三者区别
-        ArrayList arrayList = new ArrayList();
-        LinkedList linkedList = new LinkedList();
-        Vector vector = new Vector();
+    private void testNotification() {
+        sHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showNotification();
+            }
+        }, 3000);
+    }
 
-//        AIDLController.invokeAIDL(this);
-//        startService()
-//        registerReceiver()
-        SharedPreferences sharedPreferences = getSharedPreferences("", MODE_PRIVATE);
+    private void testSharedPreferences() {
+        SharedPreferences sharedPreferences = (SharedPreferences)getSharedPreferences("", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("key", "value");
         editor.commit();
+    }
 
+    private void initMediaPlayer() {
+        try {
+            mediaPlayer.setDataSource(this, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+            mediaPlayer.prepareAsync();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 此方法可以解决在部分手机无法弹出悬浮通知的问题
+     */
+    private void showNotification()
+    {
+        String title = "收到一条新消息！";
+        String content = "内容内容内容";
+        NotificationManager notificationManager = (NotificationManager)getSystemService(Service.NOTIFICATION_SERVICE);
+        Intent intent = new Intent(this, JNIActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Notification notification = getNotification(this, pendingIntent, R.mipmap.ic_launcher, title, content, true, true);
+        // 此行代码不能少，否则即使开了悬浮显示权限也无法悬浮显示
+        notification.flags = Notification.FLAG_AUTO_CANCEL;
+        if (!mediaPlayer.isPlaying())
+        {
+            mediaPlayer.start();
+        }
+        notificationManager.notify(1, notification);
+    }
+
+    private Notification getNotification(Context mContext, PendingIntent pendingIntent, int icon, String title, String content, boolean ongoing, boolean autoCancel)
+    {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, "")
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
+                .setContentTitle(title)
+                .setContentText(content)
+                .setSmallIcon(icon)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
+                .setAutoCancel(autoCancel)
+                .setOngoing(ongoing)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setTicker(content)
+                .setWhen(System.currentTimeMillis())
+                .setDefaults( NotificationCompat.DEFAULT_VIBRATE | NotificationCompat.DEFAULT_ALL | NotificationCompat.DEFAULT_SOUND)
+                .setContentIntent(pendingIntent);
+        return builder.build();
     }
 
     @Override
@@ -143,6 +207,16 @@ public class MainActivity extends BaseActivity
             default:
         }
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null)
+        {
+            mediaPlayer.reset();
+            mediaPlayer.release();
+        }
     }
 
     // ****************************************** 单线程模型中Message、Handler、MessageQueue、Looper之间的关系 start ******************************************//

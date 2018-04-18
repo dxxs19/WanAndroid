@@ -30,7 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IRequest
 {
     protected String TAG = getClass().getSimpleName();
     private OkHttpClient mOkHttpClient;
-    protected Handler mHandler = new Handler();
+    protected static Handler sHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

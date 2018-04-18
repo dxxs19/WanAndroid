@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 //apply plugin: 'com.didi.virtualapk.host'
-
+def HORI_PWD = '123456789';
 android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
@@ -30,12 +30,31 @@ android {
             path 'CMakeLists.txt' //编译后so文件的名字
         }
     }
+
+    signingConfigs {
+        release {
+            storeFile file('C:/Projects/WanAndroid/app/docs/wei.keystore.jks')
+            storePassword '123456'
+            keyAlias 'xwei'
+            keyPassword '123456'
+        }
+        debug {
+            storeFile file('C:/Projects/WanAndroid/app/docs/wei.keystore.jks')
+            storePassword '123456'
+            keyAlias 'xwei'
+            keyPassword '123456'
+        }
+    }
+
     buildTypes {
-//        release {
-//            minifyEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//        }
-        debug
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug{
+            signingConfig signingConfigs.debug
+        }
     }
     android {
         lintOptions {

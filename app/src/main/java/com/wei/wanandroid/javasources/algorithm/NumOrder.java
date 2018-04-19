@@ -1,4 +1,4 @@
-package com.wei.wanandroid.javasources.designpatterns;
+package com.wei.wanandroid.javasources.algorithm;
 
 import java.util.ArrayList;
 import java.util.List;

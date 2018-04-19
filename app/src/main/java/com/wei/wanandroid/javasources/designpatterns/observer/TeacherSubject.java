@@ -2,6 +2,7 @@ package com.wei.wanandroid.javasources.designpatterns.observer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * 老师属于被观察者，一旦老师有动作，就会通知所有学生
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class TeacherSubject implements Subject
 {
-    List<Observer> mObservers = new ArrayList<>();
+    Vector<Observer> mObservers = new Vector<>();
 
     @Override
     public void addObserver(Observer observer) {

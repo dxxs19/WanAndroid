@@ -8,6 +8,7 @@ import android.content.Context;
  */
 public class LoginManager implements IUserStatus
 {
+    /** 默认是未登录状态 **/
     IUserStatus mStatus = new LogoutStatus();
 
     public void setUserStatus(IUserStatus userStatus)

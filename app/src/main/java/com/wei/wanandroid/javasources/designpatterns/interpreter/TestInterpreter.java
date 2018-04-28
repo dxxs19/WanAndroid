@@ -1,5 +1,8 @@
 package com.wei.wanandroid.javasources.designpatterns.interpreter;
 
+/**
+ * 解释器模式
+ */
 public class TestInterpreter {
     public static void main(String[] args)
     {

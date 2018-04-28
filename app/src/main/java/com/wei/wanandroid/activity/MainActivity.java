@@ -11,10 +11,9 @@ import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.provider.Settings;
@@ -24,9 +23,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.taobao.sophix.SophixManager;
 import com.wei.utillibrary.FileUtil;
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.http.OkHttp3Activity;
@@ -34,25 +31,20 @@ import com.wei.wanandroid.activity.image.FrescoActivity;
 import com.wei.wanandroid.activity.image.GlideActivity;
 import com.wei.wanandroid.activity.memoryopt.LeakCanaryActivity;
 import com.wei.wanandroid.activity.ndk.JNIActivity;
+import com.wei.wanandroid.activity.recyclerview.RecyclerViewActivity;
 import com.wei.wanandroid.activity.rx.RxJavaActivity;
-import com.wei.wanandroid.service.MyService;
+import com.wei.wanandroid.service.MyIntentService;
 import com.wei.wanandroid.widgets.CusImgView;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Vector;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.content.Context.MODE_PRIVATE;
-
 /**
  * @author Administrator
  */
-public class MainActivity extends BaseActivity
-{
+public class MainActivity extends BaseActivity {
     @BindView(R.id.imgView_move)
     CusImgView mMoveImgView;
     MediaPlayer mediaPlayer = new MediaPlayer();
@@ -65,7 +57,30 @@ public class MainActivity extends BaseActivity
         ButterKnife.bind(this);
         initMediaPlayer();
         testSharedPreferences();
-        testNotification();
+//        testNotification();
+//        testIntentService();
+        testHandlerThread();
+    }
+
+    private void testHandlerThread() {
+        HandlerThread handlerThread = new HandlerThread("testHandlerThread");
+        handlerThread.start();
+
+        Handler handler = new Handler(handlerThread.getLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                Log.e(TAG, msg.arg1 + ", " + msg.arg2 + ", " + msg.obj + ", " + msg.what);
+            }
+        };
+        handler.sendEmptyMessage(3);
+    }
+
+    private void testIntentService() {
+        for (int i = 0; i < 3; i++) {
+            MyIntentService.startActionBaz(this, "xiang", "wei");
+//            MyIntentService.startActionFoo(this, "yi", "fei");
+        }
     }
 
     private void testNotification() {
@@ -78,7 +93,7 @@ public class MainActivity extends BaseActivity
     }
 
     private void testSharedPreferences() {
-        SharedPreferences sharedPreferences = (SharedPreferences)getSharedPreferences("", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = (SharedPreferences) getSharedPreferences("", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("key", "value");
         editor.commit();
@@ -96,25 +111,26 @@ public class MainActivity extends BaseActivity
     /**
      * 此方法可以解决在部分手机无法弹出悬浮通知的问题
      */
-    private void showNotification()
-    {
+    private void showNotification() {
         String title = "收到一条新消息！";
         String content = "内容内容内容";
-        NotificationManager notificationManager = (NotificationManager)getSystemService(Service.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Service.NOTIFICATION_SERVICE);
         Intent intent = new Intent(this, JNIActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = getNotification(this, pendingIntent, R.mipmap.ic_launcher, title, content, true, true);
         // 此行代码不能少，否则即使开了悬浮显示权限也无法悬浮显示
         notification.flags = Notification.FLAG_AUTO_CANCEL;
-        if (!mediaPlayer.isPlaying())
-        {
+        if (!mediaPlayer.isPlaying()) {
             mediaPlayer.start();
         }
-        notificationManager.notify(1, notification);
+        try {
+            notificationManager.notify(1, notification);
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
     }
 
-    private Notification getNotification(Context mContext, PendingIntent pendingIntent, int icon, String title, String content, boolean ongoing, boolean autoCancel)
-    {
+    private Notification getNotification(Context mContext, PendingIntent pendingIntent, int icon, String title, String content, boolean ongoing, boolean autoCancel) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, "")
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(content))
                 .setContentTitle(title)
@@ -126,7 +142,7 @@ public class MainActivity extends BaseActivity
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setTicker(content)
                 .setWhen(System.currentTimeMillis())
-                .setDefaults( NotificationCompat.DEFAULT_VIBRATE | NotificationCompat.DEFAULT_ALL | NotificationCompat.DEFAULT_SOUND)
+                .setDefaults(NotificationCompat.DEFAULT_VIBRATE | NotificationCompat.DEFAULT_ALL | NotificationCompat.DEFAULT_SOUND)
                 .setContentIntent(pendingIntent);
         return builder.build();
     }
@@ -165,8 +181,7 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.e(TAG, "onOptionsItemSelected, " + item.getItemId());
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.action_fresco:
                 Log.e(TAG, item.getTitle() + "");
                 startActivity(new Intent(this, FrescoActivity.class));
@@ -199,6 +214,10 @@ public class MainActivity extends BaseActivity
                 startActivity(new Intent(this, LeakCanaryActivity.class));
                 break;
 
+            case R.id.action_recycler:
+                startActivity(new Intent(this, RecyclerViewActivity.class));
+                break;
+
             case Menu.FIRST + 1:
                 Log.e(TAG, "最后添加的菜单");
                 new LooperThread().start();
@@ -212,8 +231,7 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mediaPlayer != null)
-        {
+        if (mediaPlayer != null) {
             mediaPlayer.reset();
             mediaPlayer.release();
         }
@@ -222,8 +240,7 @@ public class MainActivity extends BaseActivity
     // ****************************************** 单线程模型中Message、Handler、MessageQueue、Looper之间的关系 start ******************************************//
 //   1. new LooperThread().start();
 //   2. mHandler.sendMessage(message);
-    static class MyHandler extends Handler
-    {
+    static class MyHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -232,8 +249,8 @@ public class MainActivity extends BaseActivity
     }
 
     MyHandler mHandler;
-    class LooperThread extends Thread
-    {
+
+    class LooperThread extends Thread {
         @Override
         public void run() {
             // 初始化一个Looper，放到 ThreadLocal 中，与线程绑定。主线程已经有Looper了，所以不需要这一行代码
@@ -247,8 +264,7 @@ public class MainActivity extends BaseActivity
     }
     // ****************************************** 单线程模型中Message、Handler、MessageQueue、Looper之间的关系 end ******************************************//
 
-    public void setPermission(View view)
-    {
+    public void setPermission(View view) {
         Log.e(TAG, "--- setPermission ---");
         Intent mAccessibleIntent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
         mAccessibleIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -260,7 +276,7 @@ public class MainActivity extends BaseActivity
         AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         int currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (int) (maxVolume*0.8), 0);
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, (int) (maxVolume * 0.8), 0);
         Log.e(TAG, "currentVolume : " + currentVolume + ", maxVolume : " + maxVolume + ", 80% * maxVolume : " + maxVolume * 0.8);
 //        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, currentVolume, 0);
 //        Log.e(TAG, "currentVolume : " + currentVolume);

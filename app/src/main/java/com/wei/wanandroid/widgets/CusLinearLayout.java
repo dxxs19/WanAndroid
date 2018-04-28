@@ -40,7 +40,7 @@ public class CusLinearLayout extends LinearLayout
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Log.e(TAG, "--- onDraw ---");
+//        Log.e(TAG, "--- onDraw ---");
         super.onDraw(canvas);
     }
 

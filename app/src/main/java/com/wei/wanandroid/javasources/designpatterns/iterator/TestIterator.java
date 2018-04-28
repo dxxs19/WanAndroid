@@ -1,6 +1,7 @@
 package com.wei.wanandroid.javasources.designpatterns.iterator;
 
 /**
+ * 责任链模式
  * @author: WEI
  * @date: 2018/4/20
  */

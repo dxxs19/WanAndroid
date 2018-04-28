@@ -173,6 +173,6 @@ public class CusImgView extends android.support.v7.widget.AppCompatImageView
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Log.e(TAG, "--- onDraw ---" );
+//        Log.e(TAG, "--- onDraw ---" );
     }
 }

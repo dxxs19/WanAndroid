@@ -1,20 +1,24 @@
-package com.wei.wanandroid.activity;
+package com.wei.wanandroid.activity.recyclerview;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wei.wanandroid.R;
+import com.wei.wanandroid.activity.BaseActivity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -25,12 +29,9 @@ import butterknife.ButterKnife;
  * @author Administrator
  */
 public class RecyclerViewActivity extends BaseActivity {
-    @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
     private List<String> mDatas;
     private HomeAdapter mAdapter;
-    int count = 0;
-    boolean isShouldRun = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,37 +43,30 @@ public class RecyclerViewActivity extends BaseActivity {
     @Override
     public void initView() {
         initData();
-        ScheduledThreadPoolExecutor scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(1);
-        scheduledThreadPoolExecutor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                if (isShouldRun) {
-                    Log.e(TAG, count++ + "");
-                }
-            }
-        }, 1, 1, TimeUnit.SECONDS);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        isShouldRun = true;
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));//(new LinearLayoutManager(this));
+        mRecyclerView = findViewById(R.id.recyclerView);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mAdapter = new HomeAdapter();
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        isShouldRun = false;
-    }
-
-    private void initData() {
+    private void initData()
+    {
         mDatas = new ArrayList<>();
-        for (int i = 'A'; i <= 'z'; i++) {
-            mDatas.add("" + (char) i);
+//        for (int i = 'A'; i <= 'z'; i++) {
+//            mDatas.add("" + (char) i);
+//        }
+        File picFile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File targetFile = new File(picFile.getAbsolutePath(), "锁屏壁纸");
+        if (targetFile.exists())
+        {
+            String[] strArr = targetFile.list();
+            if (strArr != null && strArr.length > 0) {
+                for (String name : strArr) {
+                    mDatas.add(targetFile.getAbsolutePath() + File.separator + name);
+                }
+            }
         }
     }
 
@@ -81,7 +75,7 @@ public class RecyclerViewActivity extends BaseActivity {
         @Override
         public HomeAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             MyViewHolder holder = new MyViewHolder(LayoutInflater.from(RecyclerViewActivity.this).
-                    inflate(R.layout.item_recyclerview_textonly, parent, false));
+                    inflate(R.layout.item_recycler_beauty, parent, false));
             return holder;
         }
 
@@ -97,10 +91,12 @@ public class RecyclerViewActivity extends BaseActivity {
 
         class MyViewHolder extends RecyclerView.ViewHolder {
             TextView mTextView;
+            ImageView mPicImgView;
 
             public MyViewHolder(View itemView) {
                 super(itemView);
-                mTextView = itemView.findViewById(R.id.tv_item);
+                mTextView = itemView.findViewById(R.id.tv_des);
+                mPicImgView = itemView.findViewById(R.id.imgView_beauty);
             }
         }
     }

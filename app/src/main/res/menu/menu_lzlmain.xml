@@ -27,4 +27,9 @@
         android:id="@+id/action_leak"
         app:showAsAction="never"
         android:title="跳转到LeakCanaryActivity"/>
+
+    <item
+        android:id="@+id/action_recycler"
+        app:showAsAction="never"
+        android:title="跳转到RecyclerViewActivity"/>
 </menu>

@@ -3,6 +3,8 @@ package com.wei.wanandroid.service;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
+import android.support.annotation.Nullable;
+import android.util.Log;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -20,6 +22,7 @@ public class MyIntentService extends IntentService {
     // TODO: Rename parameters
     private static final String EXTRA_PARAM1 = "com.wei.wanandroid.service.extra.PARAM1";
     private static final String EXTRA_PARAM2 = "com.wei.wanandroid.service.extra.PARAM2";
+    private final String TAG = getClass().getSimpleName();
 
     public MyIntentService() {
         super("MyIntentService");
@@ -57,6 +60,7 @@ public class MyIntentService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Log.e(TAG, "currentThread = " + Thread.currentThread());
         if (intent != null) {
             final String action = intent.getAction();
             if (ACTION_FOO.equals(action)) {
@@ -76,8 +80,12 @@ public class MyIntentService extends IntentService {
      * parameters.
      */
     private void handleActionFoo(String param1, String param2) {
-        // TODO: Handle action Foo
-        throw new UnsupportedOperationException("Not yet implemented");
+        try {
+            Thread.sleep(10000);
+            Log.e(TAG, param1 + ", " + param2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -85,7 +93,35 @@ public class MyIntentService extends IntentService {
      * parameters.
      */
     private void handleActionBaz(String param1, String param2) {
-        // TODO: Handle action Baz
-        throw new UnsupportedOperationException("Not yet implemented");
+        try {
+            Thread.sleep(10000);
+            Log.e(TAG, param1 + ", " + param2);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Log.e(TAG, "--- onCreate ---");
+    }
+
+    @Override
+    public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
+        Log.e(TAG, "--- onStartCommand ---");
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Override
+    public void onStart(@Nullable Intent intent, int startId) {
+        Log.e(TAG, "--- onStart ---");
+        super.onStart(intent, startId);
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.e(TAG, "--- onDestroy ---");
+        super.onDestroy();
     }
 }

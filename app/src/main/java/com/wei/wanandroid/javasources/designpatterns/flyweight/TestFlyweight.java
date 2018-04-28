@@ -1,5 +1,8 @@
 package com.wei.wanandroid.javasources.designpatterns.flyweight;
 
+/**
+ * 享元模式
+ */
 public class TestFlyweight {
     public static void main(String[] args) {
         Ticket ticket = TicketFactory.getTicket("茂名", "广州");

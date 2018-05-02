@@ -6,21 +6,31 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.BaseActivity;
 
 import java.lang.ref.SoftReference;
+import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * @author WEI
  */
-public class RxJavaActivity extends BaseActivity {
+public class RxJavaActivity extends BaseActivity
+{
+    public static final String BEAUTY_URL = "http://gank.io/api/data/%E7%A6%8F%E5%88%A9/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +38,45 @@ public class RxJavaActivity extends BaseActivity {
         setContentView(R.layout.activity_rx_java);
 
         // 测试内存泄露
-        MyHandler myHandler = new MyHandler(this);
-        Message message = myHandler.obtainMessage();
-        message.obj = "I love beauty!";
-        myHandler.sendMessageDelayed(message, 360*1000);
+//        MyHandler myHandler = new MyHandler(this);
+//        Message message = myHandler.obtainMessage();
+//        message.obj = "I love beauty!";
+//        myHandler.sendMessageDelayed(message, 360*1000);
+        request();
     }
+
+    private void request()
+    {
+        Observable.create(new ObservableOnSubscribe<BeautyPicRespJson>() {
+            @Override
+            public void subscribe(final ObservableEmitter<BeautyPicRespJson> e) {
+                getCall(getRetrofitRequest()).enqueue(new Callback<BeautyPicRespJson>() {
+                    @Override
+                    public void onResponse(Call<BeautyPicRespJson> call, Response<BeautyPicRespJson> response) {
+                        e.onNext(response.body());
+                        e.onComplete();
+                    }
+
+                    @Override
+                    public void onFailure(Call<BeautyPicRespJson> call, Throwable t) {
+                        e.onError(t);
+                    }
+                });
+            }
+        }).subscribe(mPicRespJsonObserver);
+    }
+
+    Observer<BeautyPicRespJson> mPicRespJsonObserver = new HttpResultSubscriber<BeautyPicRespJson>() {
+        @Override
+        public void onSuccess(BeautyPicRespJson beautyPicRespJson) {
+            if (!beautyPicRespJson.isError()) {
+                List<BeautyPicRespJson.BeautiesBean> results = beautyPicRespJson.getResults();
+                for (BeautyPicRespJson.BeautiesBean bean : results) {
+                    Log.e(TAG, bean.getUrl());
+                }
+            }
+        }
+    };
 
     static class MyHandler extends Handler
     {
@@ -97,7 +141,7 @@ public class RxJavaActivity extends BaseActivity {
 //        });
 
         // 通过just创建的observable会自动调用onComplete；而通过create创建的observable不会自动调用onComplete。
-        Observable observable = Observable.just("I love beautyleg!");
+        Observable observable = Observable.just("I love rxjava!");
         Observable observable1 = Observable.create(new ObservableOnSubscribe() {
             @Override
             public void subscribe(ObservableEmitter e) throws Exception {
@@ -130,4 +174,15 @@ public class RxJavaActivity extends BaseActivity {
         }
     };
 
+    private Call<BeautyPicRespJson> getCall(RetrofitRequest retrofitRequest) {
+        return retrofitRequest.getPics(20, 1);
+    }
+
+    private RetrofitRequest getRetrofitRequest() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BEAUTY_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(RetrofitRequest.class);
+    }
 }

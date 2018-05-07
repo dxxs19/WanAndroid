@@ -1,5 +1,7 @@
 package com.wei.wanandroid.activity;
 
+import android.animation.IntEvaluator;
+import android.animation.ValueAnimator;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -23,6 +25,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 
 import com.wei.utillibrary.FileUtil;
 import com.wei.wanandroid.R;
@@ -60,6 +63,29 @@ public class MainActivity extends BaseActivity {
 //        testNotification();
 //        testIntentService();
         testHandlerThread();
+        testAnimator();
+    }
+
+    /**
+     * 插值器（Interpolator）决定 值 的变化模式（匀速、加速blabla）
+     * 估值器（TypeEvaluator）决定 值 的具体变化数值
+     */
+    private void testAnimator()
+    {
+        ValueAnimator animator = ValueAnimator.ofInt(0, 100);
+        animator.setDuration(3000);
+        // 估值器
+        animator.setEvaluator(new IntEvaluator());
+        // 插值器
+        animator.setInterpolator(new LinearInterpolator());
+        animator.setStartDelay(1000);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Log.e(TAG, animation.getAnimatedValue() + "");
+            }
+        });
+        animator.start();
     }
 
     private void testHandlerThread() {

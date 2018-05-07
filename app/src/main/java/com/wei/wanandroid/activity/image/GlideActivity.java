@@ -33,7 +33,6 @@ public class GlideActivity extends BaseActivity
 //                .load(beautyUrl)
 //                .load(R.drawable.ic_launcher_background)
                 .placeholder(R.drawable.logo_yuanjiao_120)
-                .error(R.drawable.alicloud_notification_smallicon)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .override(900, 750)
                 .into(mImageView);

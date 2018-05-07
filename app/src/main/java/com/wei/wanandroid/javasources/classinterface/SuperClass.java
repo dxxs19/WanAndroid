@@ -27,4 +27,9 @@ public class SuperClass
     {
         System.out.println("父类final方法");
     }
+
+    protected static void testStaticMethod()
+    {
+        System.out.println("父类的静态方法被调用！");
+    }
 }

@@ -22,8 +22,12 @@ public class SubClass extends SuperClass
         System.out.println("---------------------------");
         cls1.finalMethodTest();
 
+        // 父类引用子类时，属性还是父类的属性，没有被子类改变；只有当子类引用子类时，属性才是子类的属性
         SuperClass superClass = new SubClass();
         System.out.println(superClass.a);
+
+        // 父类的静态方法可以被继承，但不能被重写
+        SubClass.testStaticMethod();
     }
 
     /**
@@ -52,4 +56,9 @@ public class SubClass extends SuperClass
         // final 方法不能被子类的方法覆盖，但可以被继承
         finalMethod();
     }
+
+//    protected static void testStaticMethod()
+//    {
+//        System.out.println("子类的静态方法被调用！");
+//    }
 }

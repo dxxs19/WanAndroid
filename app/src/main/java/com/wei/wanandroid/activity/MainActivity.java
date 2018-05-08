@@ -36,10 +36,14 @@ import com.wei.wanandroid.activity.memoryopt.LeakCanaryActivity;
 import com.wei.wanandroid.activity.ndk.JNIActivity;
 import com.wei.wanandroid.activity.recyclerview.RecyclerViewActivity;
 import com.wei.wanandroid.activity.rx.RxJavaActivity;
+import com.wei.wanandroid.constants.Global;
 import com.wei.wanandroid.service.MyIntentService;
 import com.wei.wanandroid.widgets.CusImgView;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -64,6 +68,12 @@ public class MainActivity extends BaseActivity {
 //        testIntentService();
         testHandlerThread();
         testAnimator();
+        testAnyThing();
+    }
+
+    private void testAnyThing()
+    {
+//        sHandler.getLooper().quit();
     }
 
     /**

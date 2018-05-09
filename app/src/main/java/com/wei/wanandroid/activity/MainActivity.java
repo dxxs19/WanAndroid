@@ -25,7 +25,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.wei.utillibrary.FileUtil;
 import com.wei.wanandroid.R;
@@ -74,6 +77,8 @@ public class MainActivity extends BaseActivity {
     private void testAnyThing()
     {
 //        sHandler.getLooper().quit();
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.addRule(RelativeLayout.ALIGN_RIGHT);
     }
 
     /**

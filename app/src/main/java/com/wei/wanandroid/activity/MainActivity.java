@@ -39,6 +39,7 @@ import com.wei.wanandroid.activity.memoryopt.LeakCanaryActivity;
 import com.wei.wanandroid.activity.ndk.JNIActivity;
 import com.wei.wanandroid.activity.recyclerview.RecyclerViewActivity;
 import com.wei.wanandroid.activity.rx.RxJavaActivity;
+import com.wei.wanandroid.activity.webview.WebActivity;
 import com.wei.wanandroid.constants.Global;
 import com.wei.wanandroid.service.MyIntentService;
 import com.wei.wanandroid.widgets.CusImgView;
@@ -257,6 +258,12 @@ public class MainActivity extends BaseActivity {
 
             case R.id.action_recycler:
                 startActivity(new Intent(this, RecyclerViewActivity.class));
+                break;
+
+            case R.id.action_webview:
+//                String url = "https://blog.csdn.net/lsyz0021/article/details/56677132";
+                String url = "https://blog.csdn.net/lsyz0021/article/details/56677132";
+                WebActivity.startWebActivity(this, "", url);
                 break;
 
             case Menu.FIRST + 1:

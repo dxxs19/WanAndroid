@@ -32,4 +32,9 @@
         android:id="@+id/action_recycler"
         app:showAsAction="never"
         android:title="跳转到RecyclerViewActivity"/>
+
+    <item
+        android:id="@+id/action_webview"
+        app:showAsAction="never"
+        android:title="跳转到WewActivity"/>
 </menu>

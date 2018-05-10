@@ -192,6 +192,7 @@
         <activity android:name=".activity.image.GlideActivity"/>
         <activity android:name=".activity.rx.RxJavaActivity"/>
         <activity android:name=".activity.memoryopt.LeakCanaryActivity"/>
+        <activity android:name=".activity.webview.WebActivity"/>
     </application>
 
 </manifest>

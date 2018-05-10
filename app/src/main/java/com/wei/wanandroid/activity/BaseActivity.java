@@ -2,6 +2,7 @@ package com.wei.wanandroid.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.UiThread;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -10,7 +11,9 @@ import android.view.ViewGroup;
 
 import com.taobao.sophix.SophixManager;
 import com.wei.utillibrary.ToastUtils;
+import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.http.IRequestCallBacked;
+import com.wei.wanandroid.widgets.CustomProgressDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,12 +34,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IRequest
     protected String TAG = getClass().getSimpleName();
     private OkHttpClient mOkHttpClient;
     protected static Handler sHandler = new Handler();
+    protected CustomProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.e(TAG, "onCreate");
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_base);
     }
 
     @Override
@@ -183,5 +186,53 @@ public abstract class BaseActivity extends AppCompatActivity implements IRequest
     public boolean onTouchEvent(MotionEvent event) {
         Log.e(TAG, "--- onTouchEvent ---");
         return super.onTouchEvent(event);
+    }
+
+    /**
+     * showBindTalkbackFailDialog
+     * 显示一个加载中的loading对话框progressDialog
+     * 默认能手动取消
+     * @param message
+     */
+    public void showProgress(String message)
+    {
+        showProgressDialog(message, true);
+    }
+
+    /**
+     * 取消方式可设置
+     * @param message
+     * @param cancelable
+     */
+    public void showProgress(String message, boolean cancelable)
+    {
+        showProgressDialog(message, cancelable);
+    }
+
+    private void showProgressDialog(String message, boolean cancelable)
+    {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+        progressDialog = new CustomProgressDialog(this, R.style.Dialog, message);
+        progressDialog.setCancelable(cancelable);
+        try {
+            progressDialog.show();
+        } catch (Exception e) {
+            //网页JavaScript调用本接口时，该Activity有可能已经被关闭，所以要捕捉此异常
+            Log.e(TAG, e.getMessage());
+        }
+    }
+
+    /**
+     * 关闭progressDialog
+     */
+    @UiThread
+    public void hidProgress() {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
     }
 }

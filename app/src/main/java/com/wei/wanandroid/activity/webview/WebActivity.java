@@ -37,7 +37,6 @@ public class WebActivity extends BaseActivity {
 
     private final static String TAG = WebActivity.class.getSimpleName();
     private boolean mLoadError;
-    private String mErrorUrl;
     /**
      * webview 加载链接出错时显示的H5页面
      **/

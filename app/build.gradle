@@ -33,13 +33,13 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('C:/Projects/WanAndroid/app/docs/wei.keystore.jks')
+            storeFile file('./docs/wei.keystore.jks')
             storePassword '123456'
             keyAlias 'xwei'
             keyPassword '123456'
         }
         debug {
-            storeFile file('C:/Projects/WanAndroid/app/docs/wei.keystore.jks')
+            storeFile file('./docs/wei.keystore.jks')
             storePassword '123456'
             keyAlias 'xwei'
             keyPassword '123456'
@@ -103,7 +103,7 @@ dependencies {
     annotationProcessor project(':processorCompiler')
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation 'com.aliyun.ams:alicloud-android-hotfix:3.2.0'
+//    implementation 'com.aliyun.ams:alicloud-android-hotfix:3.2.0'
     //    compile 'com.didi.virtualapk:core:0.9.1'
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'

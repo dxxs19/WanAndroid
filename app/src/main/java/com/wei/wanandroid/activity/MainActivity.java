@@ -9,12 +9,12 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.ContentObserver;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -23,12 +23,12 @@ import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.util.Log;
+import android.util.Printer;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.wei.utillibrary.FileUtil;
@@ -41,32 +41,31 @@ import com.wei.wanandroid.activity.ndk.JNIActivity;
 import com.wei.wanandroid.activity.recyclerview.RecyclerViewActivity;
 import com.wei.wanandroid.activity.rx.RxJavaActivity;
 import com.wei.wanandroid.activity.webview.WebActivity;
-import com.wei.wanandroid.constants.Global;
 import com.wei.wanandroid.service.MyIntentService;
 import com.wei.wanandroid.widgets.CusImgView;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 /**
  * @author Administrator
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity
+{
     @BindView(R.id.imgView_move)
     CusImgView mMoveImgView;
     MediaPlayer mediaPlayer = new MediaPlayer();
+    Unbinder mUnbinder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.e(TAG, "--- onCreate ---");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+        mUnbinder = ButterKnife.bind(this);
         initMediaPlayer();
         testSharedPreferences();
 //        testNotification();
@@ -74,6 +73,25 @@ public class MainActivity extends BaseActivity {
         testHandlerThread();
         testAnimator();
         testAnyThing();
+        testDelayLoad();
+    }
+
+    private void testDelayLoad()
+    {
+        // 优化的延迟加载。页面加载完后再执行。此时布局已经测量、布局、绘画完毕，可以获取控件的尺寸
+        getWindow().getDecorView().post(new Runnable() {
+            @Override
+            public void run() {
+                Log.e(TAG, "--- 页面加载完毕了！ ---");
+                Log.e(TAG, "mMoveImgView 宽高为 : " + mMoveImgView.getWidth() + ", " + mMoveImgView.getHeight());
+            }
+        });
+        getMainLooper().dump(new Printer() {
+            @Override
+            public void println(String x) {
+                Log.e(TAG, x);
+            }
+        }, "onCreate");
     }
 
     private void testAnyThing()
@@ -89,19 +107,14 @@ public class MainActivity extends BaseActivity {
      */
     private void testAnimator()
     {
-        ValueAnimator animator = ValueAnimator.ofInt(0, 100);
+        ValueAnimator animator = ValueAnimator.ofInt(0, 3);
         animator.setDuration(3000);
         // 估值器
         animator.setEvaluator(new IntEvaluator());
         // 插值器
         animator.setInterpolator(new LinearInterpolator());
         animator.setStartDelay(1000);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                Log.e(TAG, animation.getAnimatedValue() + "");
-            }
-        });
+        animator.addUpdateListener(animation -> Log.e(TAG, animation.getAnimatedValue() + ""));
         animator.start();
     }
 
@@ -202,6 +215,7 @@ public class MainActivity extends BaseActivity {
 //        mMoveImgView.setAnimation(AnimationUtils.loadAnimation(this, R.anim.translate));
 //        ObjectAnimator.ofFloat(mMoveImgView, "translationX", 0, 400).setDuration(3000).start();
         TextUtils.equals(null, null);
+        Log.e(TAG, "onResume  mMoveImgView 宽高为 : " + mMoveImgView.getWidth() + ", " + mMoveImgView.getHeight());
     }
 
     @Override
@@ -284,6 +298,8 @@ public class MainActivity extends BaseActivity {
             mediaPlayer.reset();
             mediaPlayer.release();
         }
+        mUnbinder.unbind();
+        Debug.stopMethodTracing();
     }
 
     // ****************************************** 单线程模型中Message、Handler、MessageQueue、Looper之间的关系 start ******************************************//

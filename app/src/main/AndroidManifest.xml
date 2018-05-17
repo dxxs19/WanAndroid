@@ -97,7 +97,8 @@
         <activity android:name=".activity.permission.RuntimePermissionActivity"/>
         <activity android:name=".activity.image.FrescoActivity"/>
         <activity android:name=".activity.recyclerview.RecyclerViewActivity"/>
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity"
+            android:theme="@style/SplashTheme.NotTranslucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

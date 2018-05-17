@@ -218,7 +218,7 @@ public class WebActivity extends BaseActivity {
         }
     }
 
-    class CusWebChromeClient extends WebChromeClient {
+    static class CusWebChromeClient extends WebChromeClient {
         @Override
         public void onReceivedTitle(WebView view, String title) {
             // 404 , 502 Bad Gateway...

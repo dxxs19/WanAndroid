@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
@@ -42,6 +43,7 @@ import com.wei.wanandroid.activity.recyclerview.RecyclerViewActivity;
 import com.wei.wanandroid.activity.rx.RxJavaActivity;
 import com.wei.wanandroid.activity.webview.WebActivity;
 import com.wei.wanandroid.service.MyIntentService;
+import com.wei.wanandroid.service.MyService;
 import com.wei.wanandroid.widgets.CusImgView;
 
 import java.io.IOException;
@@ -71,7 +73,7 @@ public class MainActivity extends BaseActivity
 //        testNotification();
 //        testIntentService();
         testHandlerThread();
-        testAnimator();
+//        testAnimator();
         testAnyThing();
         testDelayLoad();
     }
@@ -216,6 +218,14 @@ public class MainActivity extends BaseActivity
 //        ObjectAnimator.ofFloat(mMoveImgView, "translationX", 0, 400).setDuration(3000).start();
         TextUtils.equals(null, null);
         Log.e(TAG, "onResume  mMoveImgView 宽高为 : " + mMoveImgView.getWidth() + ", " + mMoveImgView.getHeight());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Intent intent = new Intent(this, MyService.class);
+        startService(intent);
+
     }
 
     @Override

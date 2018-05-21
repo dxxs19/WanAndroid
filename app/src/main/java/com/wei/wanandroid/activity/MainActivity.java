@@ -37,6 +37,8 @@ import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.http.OkHttp3Activity;
 import com.wei.wanandroid.activity.image.FrescoActivity;
 import com.wei.wanandroid.activity.image.GlideActivity;
+import com.wei.wanandroid.activity.keeplive.KeepLiveManager;
+import com.wei.wanandroid.activity.keeplive.KeepliveActivity;
 import com.wei.wanandroid.activity.memoryopt.LeakCanaryActivity;
 import com.wei.wanandroid.activity.ndk.JNIActivity;
 import com.wei.wanandroid.activity.recyclerview.RecyclerViewActivity;
@@ -76,6 +78,11 @@ public class MainActivity extends BaseActivity
 //        testAnimator();
         testAnyThing();
         testDelayLoad();
+        testOnePixelKeeplive();
+    }
+
+    private void testOnePixelKeeplive() {
+        KeepLiveManager.registerBroadCast(this);
     }
 
     private void testDelayLoad()
@@ -223,9 +230,12 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onPause() {
         super.onPause();
+        testKeeplive();
+    }
+
+    private void testKeeplive() {
         Intent intent = new Intent(this, MyService.class);
         startService(intent);
-
     }
 
     @Override
@@ -303,13 +313,14 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         if (mediaPlayer != null) {
             mediaPlayer.reset();
             mediaPlayer.release();
         }
         mUnbinder.unbind();
         Debug.stopMethodTracing();
+//        KeepLiveManager.unRegisterBroadCast(this);
+        super.onDestroy();
     }
 
     // ****************************************** 单线程模型中Message、Handler、MessageQueue、Looper之间的关系 start ******************************************//

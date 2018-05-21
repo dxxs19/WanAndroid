@@ -19,6 +19,7 @@ public class WanApplication extends Application
 {
     private final String TAG = getClass().getSimpleName();
     private RefWatcher refWatcher;
+    private static WanApplication mApplication;
 
     public interface MsgDisplayListener {
         void handle(String msg);
@@ -30,6 +31,7 @@ public class WanApplication extends Application
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+        mApplication = this;
         Debug.startMethodTracing("trace_test");
     }
 
@@ -73,4 +75,8 @@ public class WanApplication extends Application
         return ((WanApplication)context.getApplicationContext()).refWatcher;
     }
 
+    public static WanApplication getAppContext()
+    {
+        return mApplication;
+    }
 }

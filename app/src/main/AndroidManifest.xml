@@ -201,6 +201,13 @@
             android:enabled="true"
             android:exported="true">
         </service>
+
+        <activity android:name=".activity.keeplive.KeepliveActivity"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="false"
+            android:launchMode="singleInstance"
+            android:theme="@style/OnePixelActivityTheme">
+        </activity>
     </application>
 
 </manifest>

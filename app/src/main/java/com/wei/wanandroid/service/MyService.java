@@ -79,7 +79,7 @@ public class MyService extends Service
                 .setTicker("service正在后台运行...")
                 .setPriority(NotificationCompat.PRIORITY_MAX)
                 .setWhen(System.currentTimeMillis())
-                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                .setDefaults(NotificationCompat.DEFAULT_LIGHTS)
                 .setContentIntent(pendingIntent);
         Notification notification = builder.build();
         notification.flags = Notification.FLAG_AUTO_CANCEL;

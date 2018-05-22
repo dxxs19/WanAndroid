@@ -11,6 +11,8 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/processorCompiler" />
             <option value="$PROJECT_DIR$/processorLib" />
+            <option value="$PROJECT_DIR$/pushlibrary" />
+            <option value="$PROJECT_DIR$/pushsdk" />
             <option value="$PROJECT_DIR$/utillibrary" />
           </set>
         </option>

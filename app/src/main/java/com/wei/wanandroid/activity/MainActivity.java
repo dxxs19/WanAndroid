@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
@@ -49,6 +50,7 @@ import com.wei.wanandroid.service.MyService;
 import com.wei.wanandroid.widgets.CusImgView;
 
 import java.io.IOException;
+import java.util.concurrent.Executor;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,6 +65,9 @@ public class MainActivity extends BaseActivity
     CusImgView mMoveImgView;
     MediaPlayer mediaPlayer = new MediaPlayer();
     Unbinder mUnbinder;
+    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
+    private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));
+    private static final int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 + 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,12 +84,68 @@ public class MainActivity extends BaseActivity
         testAnyThing();
         testDelayLoad();
         testOnePixelKeeplive();
+        testAsyncTask();
     }
 
+    private void testAsyncTask()
+    {
+        StringBuilder stringBuilder = new StringBuilder()
+                .append("CPU_COUNT : ")
+                .append(CPU_COUNT)
+                .append(", CORE_POOL_SIZE : ")
+                .append(CORE_POOL_SIZE)
+                .append(", MAXIMUM_POOL_SIZE : ")
+                .append(MAXIMUM_POOL_SIZE);
+        Log.e(TAG, stringBuilder.toString());
+        CusAsyncTask cusAsyncTask = new CusAsyncTask();
+        // 并行运行
+        cusAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 100L);
+        // 串行运行
+//        cusAsyncTask.execute(100L);
+        CusAsyncTask cusAsyncTask2 = new CusAsyncTask();
+        // 并行运行
+        cusAsyncTask2.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, 50L);
+        // 串行运行
+//        cusAsyncTask2.execute(50L);
+    }
+
+    static class CusAsyncTask extends AsyncTask<Long, Integer, Long>
+    {
+
+        @Override
+        protected Long doInBackground(Long... values)
+        {
+            long startTime = System.currentTimeMillis();
+            for (int progress = 0; progress < values[0]; progress ++)
+            {
+                publishProgress(progress);
+            }
+            return System.currentTimeMillis() - startTime;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values);
+            Log.e("onProgressUpdate ", values[0] + "");
+        }
+
+        @Override
+        protected void onPostExecute(Long integer) {
+            super.onPostExecute(integer);
+            Log.e("onPostExecute ", "耗时 : " + integer + "ms");
+        }
+    }
+
+    /**
+     * 1像素保活
+     */
     private void testOnePixelKeeplive() {
         KeepLiveManager.registerBroadCast(this);
     }
 
+    /**
+     * 延迟加载（等页面加载完毕之后再加载数据）
+     */
     private void testDelayLoad()
     {
         // 优化的延迟加载。页面加载完后再执行。此时布局已经测量、布局、绘画完毕，可以获取控件的尺寸

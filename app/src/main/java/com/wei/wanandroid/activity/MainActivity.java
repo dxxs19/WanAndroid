@@ -111,6 +111,10 @@ public class MainActivity extends BaseActivity
 
     static class CusAsyncTask extends AsyncTask<Long, Integer, Long>
     {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
         @Override
         protected Long doInBackground(Long... values)

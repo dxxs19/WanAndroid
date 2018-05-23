@@ -2,13 +2,18 @@ package com.wei.wanandroid.javasources.thread;
 
 import android.support.annotation.NonNull;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author: WEI
@@ -17,9 +22,9 @@ import java.util.concurrent.TimeUnit;
 public class ThreadPoolTest
 {
     public static void main(String[] args) {
-//        testScheduledThreadPool();
-//        testSingleThreadPool();
-//        testCacheThreadPool();
+        testScheduledThreadPool();
+        testSingleThreadPool();
+        testCacheThreadPool();
         testFixedThreadPool();
     }
 
@@ -28,7 +33,9 @@ public class ThreadPoolTest
      */
     private static void testScheduledThreadPool()
     {
-        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(4);
+//        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(4);
+        ScheduledExecutorService scheduledExecutorService = new ScheduledThreadPoolExecutor(4,
+                new SpecialThreadFactory("scheduled"));
         scheduledExecutorService.schedule(new Runnable() {
             @Override
             public void run() {
@@ -51,7 +58,10 @@ public class ThreadPoolTest
      */
     private static void testSingleThreadPool()
     {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
+//        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        ExecutorService executorService = new ThreadPoolExecutor(1, 1,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>(), new SpecialThreadFactory("single"));
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -63,7 +73,20 @@ public class ThreadPoolTest
                 }
             }
         };
-        Future future = executorService.submit(runnable);
+        Callable callable = new Callable() {
+            @Override
+            public Object call() throws Exception
+            {
+                int i = 0;
+                for ( ; i < 100; i ++)
+                {
+                    i += i;
+                }
+                return i;
+            }
+        };
+//        Future future = executorService.submit(runnable);
+        Future future = executorService.submit(callable);
         try {
             Object result = future.get();
             System.out.println("执行完了" + result);
@@ -83,14 +106,10 @@ public class ThreadPoolTest
      */
     private static void testCacheThreadPool()
     {
-        ExecutorService executorService = Executors.newCachedThreadPool(
-//                new ThreadFactory() {
-//            @Override
-//            public Thread newThread(@NonNull Runnable r) {
-//                return new Thread(r, "cachedthreadpool-" + r.hashCode());
-//            }
-//        }
-        );
+//        ExecutorService executorService = Executors.newCachedThreadPool();
+        ExecutorService executorService = new ThreadPoolExecutor(0, 10,
+            60L, TimeUnit.SECONDS,
+            new SynchronousQueue<Runnable>(), new SpecialThreadFactory("cached"));
         distributeTaskForThreadPool(executorService);
     }
 
@@ -99,8 +118,29 @@ public class ThreadPoolTest
      */
     private static void testFixedThreadPool()
     {
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
+//        ExecutorService executorService = Executors.newFixedThreadPool(4);
+        ExecutorService executorService = new ThreadPoolExecutor(0, 4,
+                0L, TimeUnit.SECONDS, new LinkedBlockingQueue<>(5), new SpecialThreadFactory("fixed"));
         distributeTaskForThreadPool(executorService);
+    }
+
+    /**
+     * 自定义线程工厂，返回自定义的线程名称
+     */
+    private static class SpecialThreadFactory implements ThreadFactory
+    {
+        private String mNamePrefix;
+        private static final AtomicInteger poolNumber = new AtomicInteger(1);
+
+        public SpecialThreadFactory(String namePrefix) {
+            mNamePrefix = namePrefix;
+        }
+
+        @Override
+        public Thread newThread(@NonNull Runnable r)
+        {
+            return new Thread(r, mNamePrefix+ "-threadpool-" + poolNumber.getAndIncrement());
+        }
     }
 
     /**

@@ -80,7 +80,7 @@ class RunnableDemo implements Runnable
  * 调用该 Thread 线程对象的 start() 方法。
  * 调用 FutureTask 实例对象的 get() 方法获取返回值。
  */
-class CallableDemo implements Callable<String>
+ class CallableDemo implements Callable<String>
 {
 
     @Override

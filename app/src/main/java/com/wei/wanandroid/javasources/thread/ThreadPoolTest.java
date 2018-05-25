@@ -109,7 +109,7 @@ public class ThreadPoolTest
 //        ExecutorService executorService = Executors.newCachedThreadPool();
         ExecutorService executorService = new ThreadPoolExecutor(0, 10,
             60L, TimeUnit.SECONDS,
-            new SynchronousQueue<Runnable>(), new SpecialThreadFactory("cached"));
+                new SynchronousQueue<>(), new SpecialThreadFactory("cached"));
         distributeTaskForThreadPool(executorService);
     }
 
@@ -122,25 +122,6 @@ public class ThreadPoolTest
         ExecutorService executorService = new ThreadPoolExecutor(0, 4,
                 0L, TimeUnit.SECONDS, new LinkedBlockingQueue<>(5), new SpecialThreadFactory("fixed"));
         distributeTaskForThreadPool(executorService);
-    }
-
-    /**
-     * 自定义线程工厂，返回自定义的线程名称
-     */
-    private static class SpecialThreadFactory implements ThreadFactory
-    {
-        private String mNamePrefix;
-        private static final AtomicInteger poolNumber = new AtomicInteger(1);
-
-        public SpecialThreadFactory(String namePrefix) {
-            mNamePrefix = namePrefix;
-        }
-
-        @Override
-        public Thread newThread(@NonNull Runnable r)
-        {
-            return new Thread(r, mNamePrefix+ "-threadpool-" + poolNumber.getAndIncrement());
-        }
     }
 
     /**

@@ -34,5 +34,8 @@ public class ClassLoaderTest
         // 返回null。这是因为根类加载器并没有继承ClassLoader抽象类，所以扩展类加载器getParent()返回null,
         // 但实际上，根类加载器确实是扩展类加载器的父类加载器。
         System.out.println("扩展类加载器的parent：" + extensionLoader.getParent());
+
+        // sun.misc.Launcher$AppClassLoader@63947c6b，系统类加载器
+        System.out.println(new ClassLoaderTest().getClass().getClassLoader());
     }
 }

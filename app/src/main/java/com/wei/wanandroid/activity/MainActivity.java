@@ -48,6 +48,7 @@ import com.wei.wanandroid.activity.webview.WebActivity;
 import com.wei.wanandroid.service.MyIntentService;
 import com.wei.wanandroid.service.MyService;
 import com.wei.wanandroid.widgets.CusImgView;
+import com.wei.wanandroid.widgets.PasswordInputDialog;
 
 import java.io.IOException;
 import java.util.concurrent.Executor;
@@ -85,6 +86,24 @@ public class MainActivity extends BaseActivity
         testDelayLoad();
         testOnePixelKeeplive();
         testAsyncTask();
+        testCusDialog("请输入开门密码！");
+    }
+
+    private void testCusDialog(String tips)
+    {
+        PasswordInputDialog passwordInputDialog = new PasswordInputDialog(this, R.style.Dialog, result -> {
+            Log.e(TAG, "密码为：" + result);
+            if ("123456".equals(result))
+            {
+                Log.e(TAG, "密码正确，开门成功！");
+            }
+            else
+            {
+                testCusDialog("密码错误，请重新输入！");
+            }
+        });
+        passwordInputDialog.setTips(tips);
+        passwordInputDialog.show();
     }
 
     private void testAsyncTask()
@@ -433,4 +452,8 @@ public class MainActivity extends BaseActivity
 //        Log.e(TAG, "currentVolume : " + currentVolume);
     }
 
+    public void testAnything(View view)
+    {
+        testCusDialog("请输入开门密码！");
+    }
 }

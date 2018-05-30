@@ -31,4 +31,14 @@
         android:text="权限优化"
         android:padding="10dp"/>
 
+    <Button
+        android:onClick="testAnything"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="测试按钮"
+        android:padding="10dp"/>
+
 </android.support.constraint.ConstraintLayout>

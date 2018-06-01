@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 //apply plugin: 'com.didi.virtualapk.host'
-def HORI_PWD = '123456789';
+def WEI_PWD = '123456'
 android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
@@ -34,15 +34,15 @@ android {
     signingConfigs {
         release {
             storeFile file('./docs/wei.keystore.jks')
-            storePassword '123456'
+            storePassword WEI_PWD
             keyAlias 'xwei'
-            keyPassword '123456'
+            keyPassword WEI_PWD
         }
         debug {
             storeFile file('./docs/wei.keystore.jks')
-            storePassword '123456'
+            storePassword WEI_PWD
             keyAlias 'xwei'
-            keyPassword '123456'
+            keyPassword WEI_PWD
         }
     }
 

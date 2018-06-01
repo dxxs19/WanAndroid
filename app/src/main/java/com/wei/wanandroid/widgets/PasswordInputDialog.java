@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,12 @@ import com.wei.wanandroid.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author: WEI
@@ -85,7 +92,26 @@ public class PasswordInputDialog extends Dialog
     private void showSoftInput()
     {
         focuse(mNo1EdtTxt);
+        // 自动弹出，无需延迟
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+
+        // 需要延迟，等待界面加载完毕
+//        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(1);
+//        scheduledExecutorService.schedule(new Runnable() {
+//            @Override
+//            public void run() {
+//                InputMethodManager inputManager =
+//                        (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+//                inputManager.showSoftInput(mNo1EdtTxt, 0);
+//            }
+//        }, 700, TimeUnit.MILLISECONDS);
+
+        // 界面加载完毕自动弹出，灵活性较好
+//        getWindow().getDecorView().post(() -> {
+//            InputMethodManager inputManager =
+//                    (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+//            inputManager.showSoftInput(mNo1EdtTxt, 0);
+//        });
     }
 
     private void initListener()

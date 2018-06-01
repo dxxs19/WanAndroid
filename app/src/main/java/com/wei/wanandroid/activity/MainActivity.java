@@ -14,7 +14,6 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
@@ -30,7 +29,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 
 import com.wei.utillibrary.FileUtil;
@@ -39,7 +41,6 @@ import com.wei.wanandroid.activity.http.OkHttp3Activity;
 import com.wei.wanandroid.activity.image.FrescoActivity;
 import com.wei.wanandroid.activity.image.GlideActivity;
 import com.wei.wanandroid.activity.keeplive.KeepLiveManager;
-import com.wei.wanandroid.activity.keeplive.KeepliveActivity;
 import com.wei.wanandroid.activity.memoryopt.LeakCanaryActivity;
 import com.wei.wanandroid.activity.ndk.JNIActivity;
 import com.wei.wanandroid.activity.recyclerview.RecyclerViewActivity;
@@ -51,7 +52,8 @@ import com.wei.wanandroid.widgets.CusImgView;
 import com.wei.wanandroid.widgets.PasswordInputDialog;
 
 import java.io.IOException;
-import java.util.concurrent.Executor;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -95,7 +97,7 @@ public class MainActivity extends BaseActivity
             Log.e(TAG, "密码为：" + result);
             if ("123456".equals(result))
             {
-                Log.e(TAG, "密码正确，开门成功！");
+                Log.e(TAG, "密码正确，正尝试开门......");
             }
             else
             {
@@ -314,7 +316,7 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onPause() {
         super.onPause();
-        testKeeplive();
+//        testKeeplive();
     }
 
     private void testKeeplive() {

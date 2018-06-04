@@ -37,5 +37,7 @@ public class ClassLoaderTest
 
         // sun.misc.Launcher$AppClassLoader@63947c6b，系统类加载器
         System.out.println(new ClassLoaderTest().getClass().getClassLoader());
+
+        System.out.println( Runtime.getRuntime().availableProcessors() );
     }
 }

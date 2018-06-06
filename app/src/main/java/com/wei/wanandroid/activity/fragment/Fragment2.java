@@ -65,6 +65,7 @@ public class Fragment2 extends LazyFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.e(TAG, "--- onCreateView ---");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fragment2, container, false);
     }
@@ -101,11 +102,6 @@ public class Fragment2 extends LazyFragment {
     @Override
     public void onLazyResume() {
         Log.e(TAG, "--- onLazyResume() ---");
-    }
-
-    @Override
-    public void onFirstUserInvisible() {
-        Log.e(TAG, "--- onFirstUserInvisible() ---");
     }
 
     @Override

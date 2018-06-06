@@ -32,7 +32,7 @@ public class FragActivity extends BaseActivity
         mViewPager = findViewById(R.id.viewPager);
         mMainTabPagerAdapter = new MainTabPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mMainTabPagerAdapter);
-        mViewPager.setCurrentItem(0);
+        mViewPager.setCurrentItem(TAB_ONE);
         mViewPager.setOffscreenPageLimit(mMainTabPagerAdapter.getCount());
     }
 
@@ -62,7 +62,7 @@ public class FragActivity extends BaseActivity
                     break;
 
                 case TAB_THREE:
-                    fragment = new Fragment1();
+                    fragment = new Fragment3();
                     break;
 
                     default:

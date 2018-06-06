@@ -54,7 +54,8 @@ public class Fragment1 extends LazyFragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -65,6 +66,7 @@ public class Fragment1 extends LazyFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.e(TAG, "--- onCreateView ---");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fragment1, container, false);
     }
@@ -77,7 +79,8 @@ public class Fragment1 extends LazyFragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(Context context)
+    {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
@@ -101,11 +104,6 @@ public class Fragment1 extends LazyFragment {
     @Override
     public void onLazyResume() {
         Log.e(TAG, "--- onLazyResume() ---");
-    }
-
-    @Override
-    public void onFirstUserInvisible() {
-        Log.e(TAG, "--- onFirstUserInvisible() ---");
     }
 
     @Override

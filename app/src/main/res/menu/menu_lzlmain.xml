@@ -37,4 +37,9 @@
         android:id="@+id/action_webview"
         app:showAsAction="never"
         android:title="跳转到WewActivity"/>
+
+    <item
+        android:id="@+id/action_viewPager"
+        app:showAsAction="never"
+        android:title="跳转到FragActivity"/>
 </menu>

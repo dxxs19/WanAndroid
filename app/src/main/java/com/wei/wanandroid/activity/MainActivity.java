@@ -37,6 +37,7 @@ import android.widget.RelativeLayout;
 
 import com.wei.utillibrary.FileUtil;
 import com.wei.wanandroid.R;
+import com.wei.wanandroid.activity.fragment.FragActivity;
 import com.wei.wanandroid.activity.http.OkHttp3Activity;
 import com.wei.wanandroid.activity.image.FrescoActivity;
 import com.wei.wanandroid.activity.image.GlideActivity;
@@ -60,6 +61,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
+ *
  * @author Administrator
  */
 public class MainActivity extends BaseActivity
@@ -88,7 +90,7 @@ public class MainActivity extends BaseActivity
         testDelayLoad();
         testOnePixelKeeplive();
         testAsyncTask();
-        testCusDialog("请输入开门密码！");
+//        testCusDialog("请输入开门密码！");
     }
 
     private void testCusDialog(String tips)
@@ -385,6 +387,10 @@ public class MainActivity extends BaseActivity
 //                String url = "https://blog.csdn.net/lsyz0021/article/details/56677132";
                 String url = "https://blog.csdn.net/lsyz0021/article/details/56677132";
                 WebActivity.startWebActivity(this, "", url);
+                break;
+
+            case R.id.action_viewPager:
+                startActivity(new Intent(this, FragActivity.class));
                 break;
 
             case Menu.FIRST + 1:

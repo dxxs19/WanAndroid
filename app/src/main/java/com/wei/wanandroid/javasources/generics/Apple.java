@@ -34,6 +34,9 @@ public class Apple extends Fruit<String>
 
     public static <T> void copy(Collection<T> dest, Collection<? extends T> src)
     {
-
+        for (T ele : src)
+        {
+            dest.add(ele);
+        }
     }
 }

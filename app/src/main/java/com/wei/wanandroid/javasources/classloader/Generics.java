@@ -34,4 +34,24 @@ public class Generics
         iLawsuit.defend();
         iLawsuit.finish();
     }
+
+
+    private int mResult;
+    public Generics()
+    {
+    }
+
+    public Generics(int result)
+    {
+    }
+
+    public int getResult()
+    {
+        return mResult;
+    }
+
+    public void setResult(int result)
+    {
+        mResult = result;
+    }
 }

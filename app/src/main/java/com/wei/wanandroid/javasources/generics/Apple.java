@@ -10,6 +10,9 @@ import java.util.List;
  */
 public class Apple extends Fruit<String>
 {
+    public Apple()
+    {
+    }
 
     public Apple(String s) {
         super(s);

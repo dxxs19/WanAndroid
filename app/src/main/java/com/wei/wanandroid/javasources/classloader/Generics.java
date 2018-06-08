@@ -53,5 +53,6 @@ public class Generics
     public void setResult(int result)
     {
         mResult = result;
+        System.out.println("mResult = " + mResult);
     }
 }

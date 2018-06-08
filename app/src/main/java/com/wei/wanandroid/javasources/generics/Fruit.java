@@ -4,6 +4,8 @@ public class Fruit<T>
 {
     private T mInfo;
 
+    public Fruit(){}
+
     public Fruit (T t)
     {
         mInfo = t;

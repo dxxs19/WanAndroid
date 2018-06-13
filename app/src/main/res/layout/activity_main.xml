@@ -41,4 +41,15 @@
         android:text="测试按钮"
         android:padding="10dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:gravity="center"
+        android:layout_marginBottom="50dp"
+        android:text="@string/test_str"
+        android:background="@drawable/popup"/>
+
 </android.support.constraint.ConstraintLayout>

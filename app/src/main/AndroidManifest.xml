@@ -73,7 +73,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".activity.http.OkHttp3Activity"
             android:launchMode="singleTask"/>
@@ -193,6 +192,8 @@
             android:theme="@style/OnePixelActivityTheme">
         </activity>
         <activity android:name=".activity.fragment.FragActivity"/>
+        <activity android:name=".activity.http.retrofit.RetrofitActivity">
+        </activity>
     </application>
 
 </manifest>

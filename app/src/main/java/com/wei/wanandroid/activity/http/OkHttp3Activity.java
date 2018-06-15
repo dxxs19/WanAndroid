@@ -6,10 +6,12 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.wei.wanandroid.activity.BaseActivity;
 import com.wei.wanandroid.R;
+import com.wei.wanandroid.activity.http.retrofit.RetrofitActivity;
 import com.wei.wanandroid.service.MyService;
 
 import java.io.File;
@@ -145,6 +147,10 @@ public class OkHttp3Activity extends BaseActivity
                 .removeHeader("Pragma")
                 .build();
     };
+
+    public void goToRetrofit(View view) {
+        RetrofitActivity.startRetrofitActivity(this);
+    }
 
     // 日志打印拦截器
     static class LoggingInterceptor  implements Interceptor

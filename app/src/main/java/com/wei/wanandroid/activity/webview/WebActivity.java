@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import android.webkit.ClientCertRequest;
 import android.webkit.HttpAuthHandler;
 import android.webkit.JavascriptInterface;
+import android.webkit.JsResult;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -62,7 +63,7 @@ public class WebActivity extends BaseActivity {
     public String title;
 
     /**
-     * 跳转到webactivity2
+     * 跳转到webactivity
      *
      * @param title
      * @param url
@@ -213,12 +214,20 @@ public class WebActivity extends BaseActivity {
         @Override
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
             Log.e(TAG, "error : " + error);
+            // 接受所有网站的证书
             handler.proceed();
-            super.onReceivedSslError(view, handler, error);
+            // 默认是handler.cancel();
+//            super.onReceivedSslError(view, handler, error);
         }
     }
 
-    static class CusWebChromeClient extends WebChromeClient {
+    static class CusWebChromeClient extends WebChromeClient
+    {
+        @Override
+        public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+            return super.onJsAlert(view, url, message, result);
+        }
+
         @Override
         public void onReceivedTitle(WebView view, String title) {
             // 404 , 502 Bad Gateway...

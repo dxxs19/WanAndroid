@@ -32,7 +32,7 @@
         android:padding="10dp"/>
 
     <Button
-        android:onClick="testAnything"
+        android:id="@+id/btn_test"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

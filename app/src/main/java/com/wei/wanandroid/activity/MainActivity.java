@@ -33,6 +33,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.wei.utillibrary.FileUtil;
@@ -58,6 +59,7 @@ import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -68,6 +70,8 @@ public class MainActivity extends BaseActivity
 {
     @BindView(R.id.imgView_move)
     CusImgView mMoveImgView;
+    @BindView(R.id.btn_test)
+    Button mTestBtn;
     MediaPlayer mediaPlayer = new MediaPlayer();
     Unbinder mUnbinder;
     private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
@@ -460,8 +464,16 @@ public class MainActivity extends BaseActivity
 //        Log.e(TAG, "currentVolume : " + currentVolume);
     }
 
-    public void testAnything(View view)
+    @OnClick({R.id.btn_test})
+    public void clickOpt(View view)
     {
-        testCusDialog("请输入开门密码！");
+        switch (view.getId())
+        {
+            case R.id.btn_test:
+                testCusDialog("请输入开门密码！");
+                break;
+
+                default:
+        }
     }
 }

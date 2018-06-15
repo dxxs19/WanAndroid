@@ -48,10 +48,15 @@ import com.wei.wanandroid.activity.ndk.JNIActivity;
 import com.wei.wanandroid.activity.recyclerview.RecyclerViewActivity;
 import com.wei.wanandroid.activity.rx.RxJavaActivity;
 import com.wei.wanandroid.activity.webview.WebActivity;
+import com.wei.wanandroid.bean.EventMessage;
 import com.wei.wanandroid.service.MyIntentService;
 import com.wei.wanandroid.service.MyService;
 import com.wei.wanandroid.widgets.CusImgView;
 import com.wei.wanandroid.widgets.PasswordInputDialog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -95,6 +100,7 @@ public class MainActivity extends BaseActivity
         testOnePixelKeeplive();
         testAsyncTask();
 //        testCusDialog("请输入开门密码！");
+        EventBus.getDefault().register(this);
     }
 
     private void testCusDialog(String tips)
@@ -317,6 +323,7 @@ public class MainActivity extends BaseActivity
 //        ObjectAnimator.ofFloat(mMoveImgView, "translationX", 0, 400).setDuration(3000).start();
         TextUtils.equals(null, null);
         Log.e(TAG, "onResume  mMoveImgView 宽高为 : " + mMoveImgView.getWidth() + ", " + mMoveImgView.getHeight());
+//        startService(new Intent(this, MyService.class));
     }
 
     @Override
@@ -416,6 +423,7 @@ public class MainActivity extends BaseActivity
         mUnbinder.unbind();
         Debug.stopMethodTracing();
 //        KeepLiveManager.unRegisterBroadCast(this);
+        EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 
@@ -476,4 +484,10 @@ public class MainActivity extends BaseActivity
                 default:
         }
     }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMainEventBus(EventMessage message) {
+        Log.e(TAG, "message from service : " + message.mMsg);
+    }
+
 }

@@ -12,15 +12,15 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.wei.wanandroid.activity.MainActivity;
+import com.wei.wanandroid.bean.EventMessage;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class MyService extends Service
 {
     private final static String TAG = MyService.class.getSimpleName();
     private final static int NOTIFICATION_ID = android.os.Process.myPid();
     private AssistServiceConnection mServiceConnection;
-
-    public MyService() {
-    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -31,7 +31,6 @@ public class MyService extends Service
     public int onStartCommand(Intent intent, int flags, int startId) {
         new Thread(mRunnable).start();
         setForeground();
-
         return START_STICKY;
 
     }
@@ -91,7 +90,7 @@ public class MyService extends Service
         public void run() {
             while (true)
             {
-                Log.e(TAG, "" + System.currentTimeMillis());
+                EventBus.getDefault().post(new EventMessage(System.currentTimeMillis() + ""));
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {

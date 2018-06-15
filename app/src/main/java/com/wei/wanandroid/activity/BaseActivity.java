@@ -12,6 +12,8 @@ import com.wei.utillibrary.ToastUtils;
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.widgets.CustomProgressDialog;
 
+import org.greenrobot.eventbus.EventBus;
+
 /**
  * @author Administrator
  */

@@ -2,6 +2,7 @@ package com.wei.wanandroid.activity;
 
 import android.animation.IntEvaluator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -35,7 +36,9 @@ import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.wei.qrcodescanner.ScanerActivity;
 import com.wei.utillibrary.FileUtil;
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.fragment.FragActivity;
@@ -77,6 +80,8 @@ public class MainActivity extends BaseActivity
     CusImgView mMoveImgView;
     @BindView(R.id.btn_test)
     Button mTestBtn;
+    @BindView(R.id.tv_content)
+    TextView mContentTv;
     MediaPlayer mediaPlayer = new MediaPlayer();
     Unbinder mUnbinder;
     private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
@@ -234,6 +239,7 @@ public class MainActivity extends BaseActivity
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 Log.e(TAG, msg.arg1 + ", " + msg.arg2 + ", " + msg.obj + ", " + msg.what);
+                handlerThread.quit();
             }
         };
         handler.sendEmptyMessage(3);
@@ -421,8 +427,8 @@ public class MainActivity extends BaseActivity
             mediaPlayer.release();
         }
         mUnbinder.unbind();
-        Debug.stopMethodTracing();
-//        KeepLiveManager.unRegisterBroadCast(this);
+//        Debug.stopMethodTracing();
+        KeepLiveManager.unRegisterBroadCast(this);
         EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
@@ -472,13 +478,19 @@ public class MainActivity extends BaseActivity
 //        Log.e(TAG, "currentVolume : " + currentVolume);
     }
 
-    @OnClick({R.id.btn_test})
+    @OnClick({R.id.btn_test, R.id.btn_qrscan})
     public void clickOpt(View view)
     {
         switch (view.getId())
         {
             case R.id.btn_test:
                 testCusDialog("请输入开门密码！");
+                break;
+
+            case R.id.btn_qrscan:
+                ScanerActivity.qrScan(this);
+//                Intent intent = new Intent(this, ScanerActivity.class);
+//                startActivityForResult(intent, ScanerActivity.REQUEST_SCANER_RESULT);
                 break;
 
                 default:
@@ -490,4 +502,17 @@ public class MainActivity extends BaseActivity
         Log.e(TAG, "message from service : " + message.mMsg);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        Log.d(TAG, "onActivityResult " + requestCode + "　result " + resultCode);
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (requestCode == ScanerActivity.REQUEST_SCANER_RESULT && resultCode == Activity.RESULT_OK) {
+            Bundle data = intent.getExtras();
+            if (data != null) {
+                String code = data.getString(ScanerActivity.KEY_SCAN_RESULT);
+                Log.d(TAG, "扫描结果: " + code);
+                mContentTv.setText(code);
+            }
+        }
+    }
 }

@@ -32,7 +32,7 @@ public class WanApplication extends Application
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         mApplication = this;
-        Debug.startMethodTracing("trace_test");
+//        Debug.startMethodTracing("trace_test");
     }
 
     @Override

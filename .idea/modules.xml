@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/processorLib/processorLib.iml" filepath="$PROJECT_DIR$/processorLib/processorLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/pushlibrary/pushlibrary.iml" filepath="$PROJECT_DIR$/pushlibrary/pushlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/pushsdk/pushsdk.iml" filepath="$PROJECT_DIR$/pushsdk/pushsdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qrcodescanner/qrcodescanner.iml" filepath="$PROJECT_DIR$/qrcodescanner/qrcodescanner.iml" />
       <module fileurl="file://$PROJECT_DIR$/utillibrary/utillibrary.iml" filepath="$PROJECT_DIR$/utillibrary/utillibrary.iml" />
     </modules>
   </component>

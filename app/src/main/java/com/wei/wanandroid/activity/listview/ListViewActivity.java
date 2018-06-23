@@ -34,7 +34,7 @@ public class ListViewActivity extends BaseActivity
 //        mBeautyAdapter = new BeautyAdapter(this, mBeauties);
         mBeautyAdapter = new CommonAdapter<>(this, mBeauties, R.layout.item_recycler_beauty,
                 (bean, viewHolder) -> {
-                    viewHolder.setImage(R.id.imgView_beauty, ImageUtil.getOptsBitmap(bean.getFilePath(), 100, 200));
+                    viewHolder.setImage(R.id.imgView_beauty, ImageUtil.getOptsBitmap(bean.getFilePath(), 300, 600));
                     viewHolder.setText(R.id.tv_des, bean.getFileName());
                 });
         mListView.setAdapter(mBeautyAdapter);

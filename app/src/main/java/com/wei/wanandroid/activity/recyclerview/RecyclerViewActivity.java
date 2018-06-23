@@ -40,7 +40,7 @@ public class RecyclerViewActivity extends BaseActivity {
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mAdapter = new RecyclerAdapter<>(this, mDatas, R.layout.item_recycler_beauty, (data, recyclerViewHolder) -> {
-            recyclerViewHolder.setImage(R.id.imgView_beauty, ImageUtil.getOptsBitmap(data.getFilePath(), 100, 200));
+            recyclerViewHolder.setImage(R.id.imgView_beauty, ImageUtil.getOptsBitmap(data.getFilePath(), 300, 600));
             recyclerViewHolder.setText(R.id.tv_des, data.getFileName());
         });
         mRecyclerView.setAdapter(mAdapter);

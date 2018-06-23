@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.widget.ListView;
 
+import com.wei.utillibrary.ImageUtil;
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.BaseActivity;
 import com.wei.wanandroid.activity.adapter.CommonAdapter;
@@ -33,7 +34,7 @@ public class ListViewActivity extends BaseActivity
 //        mBeautyAdapter = new BeautyAdapter(this, mBeauties);
         mBeautyAdapter = new CommonAdapter<>(this, mBeauties, R.layout.item_recycler_beauty,
                 (bean, viewHolder) -> {
-                    viewHolder.setImage(R.id.imgView_beauty, bean.getFilePath());
+                    viewHolder.setImage(R.id.imgView_beauty, ImageUtil.getOptsBitmap(bean.getFilePath(), 100, 200));
                     viewHolder.setText(R.id.tv_des, bean.getFileName());
                 });
         mListView.setAdapter(mBeautyAdapter);

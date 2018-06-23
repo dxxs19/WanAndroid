@@ -3,16 +3,18 @@ package com.wei.wanandroid.activity.adapter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.annotation.IdRes;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CommonViewHolder
+public class RecyclerViewHolder extends RecyclerView.ViewHolder
 {
-    public View mConvertView;
+    private View mConvertView;
 
-    public CommonViewHolder(View convertView) {
-        mConvertView = convertView;
+    public RecyclerViewHolder(View itemView) {
+        super(itemView);
+        mConvertView = itemView;
     }
 
     public void setText(@IdRes int resId, String content)

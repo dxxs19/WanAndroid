@@ -16,7 +16,6 @@ import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Debug;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
@@ -30,10 +29,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -46,6 +42,7 @@ import com.wei.wanandroid.activity.http.OkHttp3Activity;
 import com.wei.wanandroid.activity.image.FrescoActivity;
 import com.wei.wanandroid.activity.image.GlideActivity;
 import com.wei.wanandroid.activity.keeplive.KeepLiveManager;
+import com.wei.wanandroid.activity.listview.ListViewActivity;
 import com.wei.wanandroid.activity.memoryopt.LeakCanaryActivity;
 import com.wei.wanandroid.activity.ndk.JNIActivity;
 import com.wei.wanandroid.activity.recyclerview.RecyclerViewActivity;
@@ -62,8 +59,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -398,6 +393,10 @@ public class MainActivity extends BaseActivity
 
             case R.id.action_recycler:
                 startActivity(new Intent(this, RecyclerViewActivity.class));
+                break;
+
+            case R.id.action_listview:
+                startActivity(new Intent(this, ListViewActivity.class));
                 break;
 
             case R.id.action_webview:

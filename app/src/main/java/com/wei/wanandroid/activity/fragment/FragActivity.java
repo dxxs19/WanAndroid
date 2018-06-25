@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.BaseActivity;
+import com.wei.wanandroid.widgets.CusViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class FragActivity extends BaseActivity
     public static final int TAB_ONE = 0;
     public static final int TAB_TWO = 1;
     public static final int TAB_THREE = 2;
-    private ViewPager mViewPager;
+    private CusViewPager mViewPager;
     private MainTabPagerAdapter mMainTabPagerAdapter;
 
     @Override

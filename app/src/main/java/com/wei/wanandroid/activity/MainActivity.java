@@ -401,7 +401,8 @@ public class MainActivity extends BaseActivity
 
             case R.id.action_webview:
 //                String url = "https://blog.csdn.net/lsyz0021/article/details/56677132";
-                String url = "https://blog.csdn.net/lsyz0021/article/details/56677132";
+//                String url = "https://v.youku.com/v_show/id_XMzY3NjkxMTk4MA==.html?spm=a2h8q.11643819.m_253146.5~5!2~5~5~5~5~A";
+                String url = "https://yk.miguvideo.com/wap/resource/migu/miguH5/detail/detail.jsp?cid=642271400&deviceId=ce2ddb8d6ada8e387d7fb940482039c0&qyid=867707020994127&network=14&ov=8.0.0&location=113.394520,23.064122&src=android&platform=GPhone&p1=2_22_222&social_platform=link";
                 WebActivity.startWebActivity(this, "", url);
                 break;
 

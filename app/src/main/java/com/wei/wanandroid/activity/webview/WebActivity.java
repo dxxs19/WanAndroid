@@ -188,7 +188,10 @@ public class WebActivity extends BaseActivity {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) { // 网页加载时的连接的网址
             Log.d(TAG, "页面加载href:" + url);
-            loadWeb(url);
+            if (!url.contains("intent://"))
+            {
+                loadWeb(url);
+            }
             return true;
         }
 

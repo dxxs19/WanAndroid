@@ -7,6 +7,7 @@ import android.widget.ListView;
 import com.wei.utillibrary.ImageUtil;
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.BaseActivity;
+import com.wei.wanandroid.activity.adapter.BeautyAdapter;
 import com.wei.wanandroid.activity.adapter.CommonAdapter;
 import com.wei.wanandroid.bean.BeautyBean;
 
@@ -18,6 +19,7 @@ public class ListViewActivity extends BaseActivity
 {
     ListView mListView;
     private List<BeautyBean> mBeauties;
+//    private BeautyAdapter mBeautyAdapter;
     private CommonAdapter<BeautyBean> mBeautyAdapter;
 
     @Override

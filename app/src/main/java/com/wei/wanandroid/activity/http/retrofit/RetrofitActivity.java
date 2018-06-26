@@ -56,6 +56,7 @@ public class RetrofitActivity extends BaseActivity
                 .build();
         // 动态代理
         ApiService service = mRetrofit.create(ApiService.class);
+        // Observable
         service.getFuli(10, 2)
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<FuliBean>() {

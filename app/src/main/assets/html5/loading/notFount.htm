@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-<meta name="format-detection" content="telephone=no" />
-<title>404</title>
-<style type="text/css">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <title>404</title>
+    <style type="text/css">
 .img-min {
 	width: 64%;
 	margin: 85px auto 0;
@@ -54,18 +54,19 @@
 		font-size: 18px;
 	}
 }
-</style>
+
+    </style>
 </head>
 
 <body>
-	<div>
-		<div class="img-min">
-			<img src="../images/ic_404.png" />
-		</div>
-		<div class="title" id="title"></div>
-		<div class="describe">哎呀，页面出错啦！</div>
-	</div>
-	<script type="text/javascript">
+<div>
+    <div class="img-min">
+        <img src="../images/ic_404.png"/>
+    </div>
+    <div class="title" id="title"></div>
+    <div class="describe">哎呀，页面出错啦！</div>
+</div>
+<script type="text/javascript">
 	//获取URL参数
 	function GetURLParameter(name) {
 		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -76,6 +77,11 @@
 	}
 	var errorCode=GetURLParameter("errorCode");
 	document.getElementById("title").innerHTML=errorCode;
+
+	function getContent(msg, year){
+       return msg + year;
+    }
+
 </script>
 </body>
 </html>

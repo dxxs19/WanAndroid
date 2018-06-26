@@ -1,6 +1,7 @@
 package com.wei.wanandroid.activity.webview;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,6 +21,7 @@ import android.webkit.HttpAuthHandler;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.SslErrorHandler;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -28,6 +30,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebSettings.RenderPriority;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.BaseActivity;
@@ -89,6 +92,21 @@ public class WebActivity extends BaseActivity {
         webView = findViewById(R.id.webView_success);
         errorWebView = findViewById(R.id.webView_error);
         initWebView();
+    }
+
+    /**
+     * android 调用 js 方法，并且可接收返回值。比loadUrl功能强大
+     */
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private void testEvaluateJavascript()
+    {
+        webView.evaluateJavascript("getContent('I miss yout!', 10000)", new ValueCallback<String>() {
+            @Override
+            public void onReceiveValue(String value) {
+                Log.e(TAG, "--- evaluateJavascript --- js 返回值 ： " + value);
+                showMsg(value, Toast.LENGTH_SHORT);
+            }
+        });
     }
 
     @Override
@@ -182,6 +200,7 @@ public class WebActivity extends BaseActivity {
                 webView.setVisibility(View.VISIBLE);
                 errorWebView.setVisibility(View.GONE);
             }
+//            testEvaluateJavascript();
             super.onPageFinished(view, url);
         }
 

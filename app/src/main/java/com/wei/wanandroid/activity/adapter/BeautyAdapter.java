@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wei.utillibrary.ImageUtil;
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.bean.BeautyBean;
 
@@ -71,7 +72,8 @@ public class BeautyAdapter extends BaseAdapter
         Log.e(getClass().getSimpleName(), "convertView = " + convertView + ", postition = " + position);
         BeautyBean beautyBean = (BeautyBean) getItem(position);
         if (null != beautyBean) {
-            Bitmap bitmap = BitmapFactory.decodeFile(beautyBean.getFilePath());
+            Bitmap bitmap = ImageUtil.getOptsBitmap(beautyBean.getFilePath(), 300, 600);
+//            Bitmap bitmap = BitmapFactory.decodeFile(beautyBean.getFilePath());
             holder.mPicImgView.setImageBitmap(bitmap);
             holder.mTextView.setText(beautyBean.getFileName());
         }

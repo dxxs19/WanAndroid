@@ -10,11 +10,13 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -23,12 +25,15 @@ import android.os.Message;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Printer;
+import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -101,6 +106,44 @@ public class MainActivity extends BaseActivity
         testAsyncTask();
 //        testCusDialog("请输入开门密码！");
         EventBus.getDefault().register(this);
+        testWidthHeight();
+    }
+
+    /**
+     * 测量屏幕宽高的常用方式
+     */
+    private void testWidthHeight()
+    {
+        View decorView = getWindow().getDecorView();
+        decorView.post(() -> {
+            // width : 1080, height : 1920
+           Log.e(TAG, "width : " + decorView.getWidth() + ", height : " + decorView.getHeight());
+           // measuredwidth : 1080, measuredheight : 1920
+           Log.e(TAG, "measuredwidth : " + decorView.getMeasuredWidth() + ", measuredheight : " + decorView.getMeasuredHeight());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+            {
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                decorView.getDisplay().getMetrics(displayMetrics);
+                // DisplayMetrics{density=3.0, width=1080, height=1920, scaledDensity=3.0, xdpi=428.625, ydpi=427.789}
+                Log.e(TAG, displayMetrics.toString());
+            }
+        });
+
+        WindowManager windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        // WindowManager, width : 1080, height : 1920
+        Log.e(TAG, "WindowManager, width : " + display.getWidth() + ", height : " + display.getHeight());
+
+        WindowManager wm = getWindowManager();
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        wm.getDefaultDisplay().getMetrics(displayMetrics);
+        // WindowManager : DisplayMetrics{density=3.0, width=1080, height=1920, scaledDensity=3.0, xdpi=428.625, ydpi=427.789}
+        Log.e(TAG, "WindowManager : " + displayMetrics.toString());
+
+        Resources resources = getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+//        Resources : DisplayMetrics{density=3.0, width=1080, height=1920, scaledDensity=3.0, xdpi=428.625, ydpi=427.789}
+        Log.e(TAG, "Resources : " + metrics.toString());
     }
 
     private void testCusDialog(String tips)
@@ -402,8 +445,8 @@ public class MainActivity extends BaseActivity
             case R.id.action_webview:
 //                String url = "https://blog.csdn.net/lsyz0021/article/details/56677132";
 //                String url = "https://v.youku.com/v_show/id_XMzY3NjkxMTk4MA==.html?spm=a2h8q.11643819.m_253146.5~5!2~5~5~5~5~A";
-//                String url = "https://yk.miguvideo.com/wap/resource/migu/miguH5/detail/detail.jsp?cid=642271400&deviceId=ce2ddb8d6ada8e387d7fb940482039c0&qyid=867707020994127&network=14&ov=8.0.0&location=113.394520,23.064122&src=android&platform=GPhone&p1=2_22_222&social_platform=link";
-                String url = "file:///android_asset/html5/loading/notFount.htm";
+                String url = "https://yk.miguvideo.com/wap/resource/migu/miguH5/detail/detail.jsp?cid=642271400&deviceId=ce2ddb8d6ada8e387d7fb940482039c0&qyid=867707020994127&network=14&ov=8.0.0&location=113.394520,23.064122&src=android&platform=GPhone&p1=2_22_222&social_platform=link";
+//                String url = "file:///android_asset/html5/loading/notFount.htm";
                 WebActivity.startWebActivity(this, "", url);
                 break;
 

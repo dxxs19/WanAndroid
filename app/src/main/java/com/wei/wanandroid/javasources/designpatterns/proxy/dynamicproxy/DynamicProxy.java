@@ -32,6 +32,8 @@ public class DynamicProxy implements InvocationHandler
         //　　在代理真实对象前我们可以添加一些自己的操作
         System.out.println("before ...");
         System.out.println("Method:" + method);
+        System.out.println("method.getDeclaringClass() : " + method.getDeclaringClass());
+        System.out.println("method.getAnnotations() : " + method.getAnnotations());
         System.out.println("obj = " + mObject + ", args = " + args);
 
         // 调用被代理类对象的方法; 当代理对象调用真实对象的方法时，其会自动的跳转到代理对象关联的handler对象的invoke方法来进行调用

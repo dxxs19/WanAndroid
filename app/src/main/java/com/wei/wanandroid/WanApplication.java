@@ -9,6 +9,7 @@ import android.util.Log;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.wei.utillibrary.OSUtil;
 
 /**
  * @author: WEI
@@ -42,6 +43,8 @@ public class WanApplication extends Application
         super.onCreate();
         Fresco.initialize(this);
         setupLeakCanary();
+        // 小米5：256M；设置 android:largeHeap="true" 后 变成：512M
+        Log.e(TAG, "App 可分配内存大小为 ：" + OSUtil.getMaxMemory() + "M");
     }
 
     private void setupLeakCanary() {

@@ -13,6 +13,8 @@ public class ReflectTest
     public static void main(String[] args) {
         ReflectTest reflectTest = new ReflectTest();
         reflectTest.relect();
+
+
     }
 
     public void say()

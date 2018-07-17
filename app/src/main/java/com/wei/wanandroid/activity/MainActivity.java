@@ -15,6 +15,8 @@ import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.RingtoneManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -38,6 +40,7 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wei.qrcodescanner.ScanerActivity;
 import com.wei.utillibrary.FileUtil;
@@ -107,6 +110,23 @@ public class MainActivity extends BaseActivity
 //        testCusDialog("请输入开门密码！");
         EventBus.getDefault().register(this);
         testWidthHeight();
+        testNetworkAvailable();
+    }
+
+    private void testNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if (networkInfo != null)
+        {
+            if (networkInfo.isAvailable())
+            {
+                showMsg("网络可用", Toast.LENGTH_SHORT);
+            }
+            else
+            {
+                showMsg("网络不可用", Toast.LENGTH_SHORT);
+            }
+        }
     }
 
     /**

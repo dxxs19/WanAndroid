@@ -29,7 +29,7 @@ public class CommonAdapter<T> extends BaseAdapter
     }
 
     @Override
-    public Object getItem(int position) {
+    public T getItem(int position) {
         return mDatas.get(position);
     }
 
@@ -52,7 +52,7 @@ public class CommonAdapter<T> extends BaseAdapter
             holder = (CommonViewHolder) convertView.getTag();
         }
         Log.e(getClass().getSimpleName(), "convertView = " + convertView);
-        T bean = (T) getItem(position);
+        T bean = getItem(position);
         if (null != bean) {
             mDealWithData.bindDataToViewHolder(bean, holder);
         }

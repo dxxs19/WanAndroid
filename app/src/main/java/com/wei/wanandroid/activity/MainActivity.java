@@ -45,6 +45,7 @@ import android.widget.Toast;
 import com.wei.qrcodescanner.ScanerActivity;
 import com.wei.utillibrary.FileUtil;
 import com.wei.wanandroid.R;
+import com.wei.wanandroid.activity.eventdispatch.EventDispatchActivity;
 import com.wei.wanandroid.activity.fragment.FragActivity;
 import com.wei.wanandroid.activity.http.OkHttp3Activity;
 import com.wei.wanandroid.activity.image.FrescoActivity;
@@ -56,6 +57,7 @@ import com.wei.wanandroid.activity.ndk.JNIActivity;
 import com.wei.wanandroid.activity.recyclerview.RecyclerViewActivity;
 import com.wei.wanandroid.activity.rx.RxJavaActivity;
 import com.wei.wanandroid.activity.webview.WebActivity;
+import com.wei.wanandroid.activity.webview.X5WebActivity;
 import com.wei.wanandroid.bean.EventMessage;
 import com.wei.wanandroid.service.MyIntentService;
 import com.wei.wanandroid.service.MyService;
@@ -67,6 +69,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -468,10 +472,15 @@ public class MainActivity extends BaseActivity
                 String url = "https://yk.miguvideo.com/wap/resource/migu/miguH5/detail/detail.jsp?cid=642271400&deviceId=ce2ddb8d6ada8e387d7fb940482039c0&qyid=867707020994127&network=14&ov=8.0.0&location=113.394520,23.064122&src=android&platform=GPhone&p1=2_22_222&social_platform=link";
 //                String url = "file:///android_asset/html5/loading/notFount.htm";
                 WebActivity.startWebActivity(this, "", url);
+//                X5WebActivity.startWebActivity(this, "", url);
                 break;
 
             case R.id.action_viewPager:
                 startActivity(new Intent(this, FragActivity.class));
+                break;
+
+            case R.id.action_event:
+                startActivity(new Intent(this, EventDispatchActivity.class));
                 break;
 
             case Menu.FIRST + 1:

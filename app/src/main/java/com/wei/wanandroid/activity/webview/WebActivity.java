@@ -14,16 +14,12 @@ import android.support.annotation.UiThread;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.webkit.ClientCertRequest;
-import android.webkit.HttpAuthHandler;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
 import android.webkit.SslErrorHandler;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
@@ -65,6 +61,8 @@ public class WebActivity extends BaseActivity {
      */
     public String title;
 
+    private long mStartTime;
+
     /**
      * 跳转到webactivity
      *
@@ -80,7 +78,9 @@ public class WebActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        mStartTime = System.currentTimeMillis();
         super.onCreate(savedInstanceState);
         title = getIntent().getStringExtra(KEY_TITLE);
         currentUrl = getIntent().getStringExtra(KEY_URL);
@@ -201,7 +201,8 @@ public class WebActivity extends BaseActivity {
                 errorWebView.setVisibility(View.GONE);
             }
 //            testEvaluateJavascript();
-            super.onPageFinished(view, url);
+            long loadTime = System.currentTimeMillis() - mStartTime;
+            Log.e(TAG, "加载该页面耗时 ：" + loadTime + " ms");
         }
 
         @Override
@@ -240,6 +241,33 @@ public class WebActivity extends BaseActivity {
             handler.proceed();
             // 默认是handler.cancel();
 //            super.onReceivedSslError(view, handler, error);
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            Log.e(TAG, "shouldOverrideUrlLoading");
+            return super.shouldOverrideUrlLoading(view, request);
+        }
+
+        @Nullable
+        @Override
+        public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+//            StringBuilder stringBuilder = new StringBuilder();
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                Map<String, String> stringMap = request.getRequestHeaders();
+//                if (stringMap != null)
+//                {
+//                    // RequestHeaders : {User-Agent=Mozilla/5.0 (Linux; Android 6.0.1; SM-G920V Build/MMB29K) AppleWebKit/537.36
+//                    // (KHTML, like Gecko) Chrome/52.0.2743.98 Mobile Safari/537.36, Accept=text/html,application/xhtml+xml,
+//                    // application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8, Upgrade-Insecure-Requests=1}
+//                    Log.e(TAG, "RequestHeaders : " + stringMap.toString());
+//                }
+//                stringBuilder.append(request.getMethod())
+//                        .append(",")
+//                        .append(request.getUrl());
+//            }
+//            Log.e(TAG, "shouldInterceptRequest : " + stringBuilder);
+            return super.shouldInterceptRequest(view, request);
         }
     }
 

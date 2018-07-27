@@ -82,7 +82,22 @@ public class CusImgView extends android.support.v7.widget.AppCompatImageView
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         Log.e(TAG, "--- dispatchTouchEvent ---");
+        switch (event.getAction())
+        {
+            case MotionEvent.ACTION_DOWN:
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+                break;
+
+            case MotionEvent.ACTION_UP:
+                break;
+
+            default:
+        }
         return super.dispatchTouchEvent(event);
+//        return false;
+//        return true;
     }
 
     @Override
@@ -153,6 +168,8 @@ public class CusImgView extends android.support.v7.widget.AppCompatImageView
         }
         Log.e(TAG, "--- onTouchEvent ---");
         return super.onTouchEvent(event);
+//        return false;
+//        return true;
     }
 
     @Override

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.eventdispatch.EventDispatchActivity">
+
+    <com.wei.wanandroid.widgets.CusLinearLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.wei.wanandroid.widgets.CusButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:visibility="visible"
+            android:gravity="center"
+            android:text="事件分发测试"/>
+
+        <com.wei.wanandroid.widgets.CusImgView
+            android:id="@+id/imgView_move"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:src="@drawable/ic_launcher_background"/>
+    </com.wei.wanandroid.widgets.CusLinearLayout>
+
+</android.support.constraint.ConstraintLayout>

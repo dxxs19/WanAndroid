@@ -2,7 +2,6 @@ package com.wei.wanandroid.javasources.basics;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author: WEI
@@ -34,6 +33,7 @@ public class TestString
 
         System.out.println(map.get(null));
         System.out.println(map.get("x"));
+
     }
 
     private void changeStr(String[] strings) {

@@ -91,19 +91,6 @@ public abstract class BaseActivity extends AppCompatActivity
         ToastUtils.showToast(this, msg, period);
     }
 
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        Log.e(TAG, "--- dispatchTouchEvent ---");
-        return super.dispatchTouchEvent(ev);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        Log.e(TAG, "--- onTouchEvent ---");
-        return super.onTouchEvent(event);
-    }
-
     /**
      * showBindTalkbackFailDialog
      * 显示一个加载中的loading对话框progressDialog

@@ -47,4 +47,9 @@
         android:id="@+id/action_viewPager"
         app:showAsAction="never"
         android:title="跳转到FragActivity"/>
+
+    <item
+        android:id="@+id/action_event"
+        app:showAsAction="never"
+        android:title="跳转到EventDispatchActivity"/>
 </menu>

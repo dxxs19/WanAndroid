@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'channel'
 //apply plugin: 'com.didi.virtualapk.host'
+apply plugin: 'io.objectbox'
 def WEI_PWD = '123456'
 android {
     compileSdkVersion 27
@@ -152,4 +153,9 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:recyclerview-v7:27.1.1'
     api 'com.leon.channel:helper:2.0.1'
+    // dagger2
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.16'
+    api 'com.google.dagger:dagger-android:2.16'
+    api 'com.google.dagger:dagger-android-support:2.16'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.16'
 }

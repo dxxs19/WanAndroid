@@ -195,8 +195,13 @@
         <activity android:name=".activity.listview.ListViewActivity"/>
         <activity android:name=".activity.eventdispatch.EventDispatchActivity">
         </activity>
-        <activity android:name=".activity.webview.X5WebActivity"
+        <activity
+            android:name=".activity.webview.X5WebActivity"
             android:configChanges="orientation|screenSize|keyboardHidden">
+        </activity>
+        <activity android:name=".activity.db.ObjectBoxActivity">
+        </activity>
+        <activity android:name=".activity.dagger_android.DaggerAndroidActivity">
         </activity>
     </application>
 

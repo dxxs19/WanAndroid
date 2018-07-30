@@ -52,4 +52,9 @@
         android:id="@+id/action_event"
         app:showAsAction="never"
         android:title="跳转到EventDispatchActivity"/>
+
+    <item
+        android:id="@+id/action_objBox"
+        app:showAsAction="never"
+        android:title="跳转到ObjectBoxActivity"/>
 </menu>

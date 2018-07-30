@@ -14,6 +14,8 @@ import com.wei.wanandroid.widgets.CustomProgressDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
+import dagger.android.AndroidInjection;
+
 /**
  * @author Administrator
  */
@@ -23,9 +25,11 @@ public abstract class BaseActivity extends AppCompatActivity
     protected static Handler sHandler = new Handler();
     protected CustomProgressDialog progressDialog;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.e(TAG, "onCreate");
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
     }
 

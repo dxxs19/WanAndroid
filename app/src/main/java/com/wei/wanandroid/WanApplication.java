@@ -11,6 +11,9 @@ import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 import com.tencent.smtt.sdk.QbSdk;
 import com.wei.utillibrary.OSUtil;
+import com.wei.wanandroid.bean.MyObjectBox;
+
+import io.objectbox.BoxStore;
 
 /**
  * @author: WEI
@@ -22,6 +25,7 @@ public class WanApplication extends Application
     private final String TAG = getClass().getSimpleName();
     private RefWatcher refWatcher;
     private static WanApplication mApplication;
+    public static BoxStore sBoxStore;
 
     public interface MsgDisplayListener {
         void handle(String msg);
@@ -47,6 +51,11 @@ public class WanApplication extends Application
         // 小米5：256M；设置 android:largeHeap="true" 后 变成：512M
         Log.e(TAG, "App 可分配内存大小为 ：" + OSUtil.getMaxMemory() + "M");
         initX5();
+        initObjectBox();
+    }
+
+    private void initObjectBox() {
+        sBoxStore = MyObjectBox.builder().androidContext(this).build();
     }
 
     private void setupLeakCanary() {

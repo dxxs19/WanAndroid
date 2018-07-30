@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wei.wanandroid.activity.image.CusAppGlideModule;
+
 public class CommonViewHolder
 {
     public View mConvertView;
@@ -24,10 +26,14 @@ public class CommonViewHolder
         }
     }
 
-    public void setImage(@IdRes int resId, String pathName)
+    public void setImageByPath(@IdRes int resId, String pathName)
     {
-        Bitmap bitmap = BitmapFactory.decodeFile(pathName);
-        setBitmapToView(bitmap, mConvertView.findViewById(resId));
+//        Bitmap bitmap = BitmapFactory.decodeFile(pathName);
+//        setBitmapToView(bitmap, mConvertView.findViewById(resId));
+        ImageView imageView = mConvertView.findViewById(resId);
+        CusAppGlideModule.with(mConvertView.getContext())
+                .load(pathName)
+                .into(imageView);
     }
 
     public void setImage(@IdRes int resId, Bitmap bitmap)
@@ -37,10 +43,8 @@ public class CommonViewHolder
 
     private void setBitmapToView(Bitmap bitmap, View view)
     {
-        if (bitmap != null) {
-            if (view instanceof ImageView) {
-                ((ImageView) view).setImageBitmap(bitmap);
-            }
+        if (view instanceof ImageView) {
+            ((ImageView) view).setImageBitmap(bitmap);
         }
     }
 

@@ -36,9 +36,22 @@ public class ListViewActivity extends BaseActivity
 //        mBeautyAdapter = new BeautyAdapter(this, mBeauties);
         mBeautyAdapter = new CommonAdapter<>(this, mBeauties, R.layout.item_recycler_beauty,
                 (bean, viewHolder) -> {
-                    viewHolder.setImage(R.id.imgView_beauty, ImageUtil.getOptsBitmap(bean.getFilePath(), 300, 600));
                     viewHolder.setText(R.id.tv_des, bean.getFileName());
+
+                    if (mBeautyAdapter.isLoadAccess())
+                    {
+//                        viewHolder.setImage(R.id.imgView_beauty, ImageUtil.getOptsBitmap(bean.getFilePath(), 300, 600));
+                        viewHolder.setImageByPath(R.id.imgView_beauty, bean.getFilePath());
+                    }else
+                    {
+                        if (mBeautyAdapter.verifyPositionNeedRequestGetView(mBeautyAdapter.getPosition()))
+                        {
+                            viewHolder.setImage(R.id.imgView_beauty, null);
+                        }
+                    }
+
                 });
+        mListView.setOnScrollListener(mBeautyAdapter);
         mListView.setAdapter(mBeautyAdapter);
     }
 

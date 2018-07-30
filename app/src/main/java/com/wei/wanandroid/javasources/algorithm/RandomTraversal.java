@@ -29,9 +29,8 @@ public class RandomTraversal extends BaseALG
         for (int i = 0; i < len; i ++)
         {
             randomIndex = random.nextInt( list.size() );//(int) (Math.random() * len - 1);
-            Object a = list.get( randomIndex );
-            list.remove(randomIndex);
-            System.out.println(a);
+            Object a = list.remove(randomIndex);
+            System.out.print(a + ", ");
         }
 
     }

@@ -18,8 +18,8 @@ public class SelectionSort extends BaseALG
         selectionSort.printArray(a);
 //        selectionSort.selectionSort(a);
 //        selectionSort.bubbleSort(a);
-//        selectionSort.selectionSortTest(a);
-        selectionSort.bubbleSortTest(a);
+        selectionSort.selectionSortTest(a);
+//        selectionSort.bubbleSortTest(a);
         selectionSort.printArray(a);
     }
 
@@ -31,16 +31,15 @@ public class SelectionSort extends BaseALG
     private void bubbleSortTest(int[] a) {
         int len = a.length;
         int i, j, temp;
-        for ( i = 0; i < len; i ++)
+        for (i = 0; i < len; i ++)
         {
-            // 每次都从头开始比较，因为前面是未排序的，最后面的是已排序的
-            for ( j = 1; j < len - i; j ++)
+            for (j = 1; j < len-i; j ++)
             {
-                if (a[j - 1] > a[j])
+                if (a[j] < a[j - 1])
                 {
-                    temp = a[j];
-                    a[j] = a[j - 1];
-                    a[j - 1] = temp;
+                    temp = a[j-1];
+                    a[j - 1] = a[j];
+                    a[j] = temp;
                 }
             }
         }
@@ -59,15 +58,14 @@ public class SelectionSort extends BaseALG
             minIndex = i;
             for (j = i + 1; j < len; j ++)
             {
-                // 此处是a[minIndex]（不是a[i]）与a[j]比较
                 if (a[minIndex] > a[j])
                 {
                     minIndex = j;
                 }
             }
-            temp = a[i];
-            a[i] = a[minIndex];
-            a[minIndex] = temp;
+            temp = a[minIndex];
+            a[minIndex] = a[i];
+            a[i] = temp;
         }
     }
 

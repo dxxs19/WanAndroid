@@ -45,6 +45,7 @@ import android.widget.Toast;
 import com.wei.qrcodescanner.ScanerActivity;
 import com.wei.utillibrary.FileUtil;
 import com.wei.wanandroid.R;
+import com.wei.wanandroid.activity.dagger_android.DaggerAndroidActivity;
 import com.wei.wanandroid.activity.db.ObjectBoxActivity;
 import com.wei.wanandroid.activity.eventdispatch.EventDispatchActivity;
 import com.wei.wanandroid.activity.fragment.FragActivity;
@@ -556,7 +557,7 @@ public class MainActivity extends BaseActivity
 //        Log.e(TAG, "currentVolume : " + currentVolume);
     }
 
-    @OnClick({R.id.btn_test, R.id.btn_qrscan})
+    @OnClick({R.id.btn_test, R.id.btn_qrscan, R.id.btn_dagger})
     public void clickOpt(View view)
     {
         switch (view.getId())
@@ -569,6 +570,10 @@ public class MainActivity extends BaseActivity
                 ScanerActivity.qrScan(this);
 //                Intent intent = new Intent(this, ScanerActivity.class);
 //                startActivityForResult(intent, ScanerActivity.REQUEST_SCANER_RESULT);
+                break;
+
+            case R.id.btn_dagger:
+                startActivity(new Intent(this, DaggerAndroidActivity.class));
                 break;
 
                 default:

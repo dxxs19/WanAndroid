@@ -25,11 +25,21 @@
     </com.wei.wanandroid.widgets.CusLinearLayout>
 
     <Button
+        android:id="@+id/btn_topleft"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:onClick="setPermission"
         android:padding="10dp"
         android:text="权限优化"/>
+
+    <Button
+        android:id="@+id/btn_dagger"
+        app:layout_constraintTop_toBottomOf="@id/btn_topleft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="setPermission"
+        android:padding="10dp"
+        android:text="dagger测试"/>
 
     <Button
         android:id="@+id/btn_test"

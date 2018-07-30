@@ -1,5 +1,6 @@
 package com.wei.wanandroid;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Debug;
@@ -11,8 +12,14 @@ import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 import com.tencent.smtt.sdk.QbSdk;
 import com.wei.utillibrary.OSUtil;
+import com.wei.wanandroid.activity.dagger_android.DaggerMyAppComponent;
 import com.wei.wanandroid.bean.MyObjectBox;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
 import io.objectbox.BoxStore;
 
 /**
@@ -20,12 +27,19 @@ import io.objectbox.BoxStore;
  * @date: 2017/10/31
  */
 
-public class WanApplication extends Application
+public class WanApplication extends Application //implements HasActivityInjector
 {
     private final String TAG = getClass().getSimpleName();
     private RefWatcher refWatcher;
     private static WanApplication mApplication;
     public static BoxStore sBoxStore;
+    @Inject
+    DispatchingAndroidInjector<Activity> mDispatchingAndroidInjector;
+
+//    @Override
+    public AndroidInjector<Activity> activityInjector() {
+        return mDispatchingAndroidInjector;
+    }
 
     public interface MsgDisplayListener {
         void handle(String msg);
@@ -52,6 +66,7 @@ public class WanApplication extends Application
         Log.e(TAG, "App 可分配内存大小为 ：" + OSUtil.getMaxMemory() + "M");
         initX5();
         initObjectBox();
+//        DaggerMyAppComponent.create().inject(this);
     }
 
     private void initObjectBox() {

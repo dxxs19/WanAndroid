@@ -7,6 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".activity.eventdispatch.EventDispatchActivity">
 
+    <Button
+        android:id="@+id/btn_left"
+        android:layout_width="190dp"
+        android:layout_height="90dp"
+        android:text="xxxxx"/>
+
+    <Button
+        android:id="@+id/btn_right"
+        app:layout_constraintLeft_toRightOf="@id/btn_left"
+        android:layout_width="190dp"
+        android:layout_height="90dp"
+        android:text="yyyyy"/>
+
     <com.wei.wanandroid.widgets.CusLinearLayout
         android:layout_width="300dp"
         android:layout_height="300dp"

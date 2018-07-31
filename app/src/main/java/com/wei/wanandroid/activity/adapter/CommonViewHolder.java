@@ -31,9 +31,9 @@ public class CommonViewHolder
 //        Bitmap bitmap = BitmapFactory.decodeFile(pathName);
 //        setBitmapToView(bitmap, mConvertView.findViewById(resId));
         ImageView imageView = mConvertView.findViewById(resId);
-        CusAppGlideModule.with(mConvertView.getContext())
-                .load(pathName)
-                .into(imageView);
+//        CusAppGlideModule.with(mConvertView.getContext())
+//                .load(pathName)
+//                .into(imageView);
     }
 
     public void setImage(@IdRes int resId, Bitmap bitmap)

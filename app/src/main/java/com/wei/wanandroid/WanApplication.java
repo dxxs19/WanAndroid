@@ -70,7 +70,7 @@ public class WanApplication extends Application //implements HasActivityInjector
     }
 
     private void initObjectBox() {
-        sBoxStore = MyObjectBox.builder().androidContext(this).build();
+//        sBoxStore = MyObjectBox.builder().androidContext(this).build();
     }
 
     private void setupLeakCanary() {

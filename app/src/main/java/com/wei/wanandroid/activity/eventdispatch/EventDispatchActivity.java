@@ -3,11 +3,15 @@ package com.wei.wanandroid.activity.eventdispatch;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.BaseActivity;
 
-public class EventDispatchActivity extends BaseActivity {
+public class EventDispatchActivity extends BaseActivity
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +21,18 @@ public class EventDispatchActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        Button leftBtn = findViewById(R.id.btn_left);
+        Button rightBtn = findViewById(R.id.btn_right);
+        Log.e(TAG, "mScreenWidth : " + mScreenWidth + ", mDensity : " + mDensity);
+        ViewGroup.LayoutParams leftLayoutParams = leftBtn.getLayoutParams();
+        ViewGroup.LayoutParams rightLayoutParams = rightBtn.getLayoutParams();
+        if (mScreenWidth < 380 * mDensity)
+        {
+            leftLayoutParams.width = mScreenWidth/2;
+            rightLayoutParams.width = mScreenWidth/2;
+        }
+        leftBtn.setLayoutParams(leftLayoutParams);
+        rightBtn.setLayoutParams(rightLayoutParams);
     }
 
 

@@ -24,7 +24,8 @@ public abstract class BaseActivity extends AppCompatActivity
     protected String TAG = getClass().getSimpleName();
     protected static Handler sHandler = new Handler();
     protected CustomProgressDialog progressDialog;
-
+    public static int mScreenWidth;
+    public static float mDensity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -150,7 +150,7 @@ public class MainActivity extends BaseActivity
             {
                 DisplayMetrics displayMetrics = new DisplayMetrics();
                 decorView.getDisplay().getMetrics(displayMetrics);
-                // DisplayMetrics{density=3.0, width=1080, height=1920, scaledDensity=3.0, xdpi=428.625, ydpi=427.789}
+                // Xiaomi5：DisplayMetrics{density=3.0, width=1080, height=1920, scaledDensity=3.0, xdpi=428.625, ydpi=427.789}
                 Log.e(TAG, displayMetrics.toString());
             }
         });
@@ -168,6 +168,8 @@ public class MainActivity extends BaseActivity
 
         Resources resources = getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
+        mScreenWidth = metrics.widthPixels;
+        mDensity = metrics.density;
 //        Resources : DisplayMetrics{density=3.0, width=1080, height=1920, scaledDensity=3.0, xdpi=428.625, ydpi=427.789}
         Log.e(TAG, "Resources : " + metrics.toString());
     }

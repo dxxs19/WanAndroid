@@ -28,9 +28,9 @@ public class CommonViewHolder
 
     public void setImageByPath(@IdRes int resId, String pathName)
     {
-//        Bitmap bitmap = BitmapFactory.decodeFile(pathName);
-//        setBitmapToView(bitmap, mConvertView.findViewById(resId));
-        ImageView imageView = mConvertView.findViewById(resId);
+        Bitmap bitmap = BitmapFactory.decodeFile(pathName);
+        setBitmapToView(bitmap, mConvertView.findViewById(resId));
+//        ImageView imageView = mConvertView.findViewById(resId);
 //        CusAppGlideModule.with(mConvertView.getContext())
 //                .load(pathName)
 //                .into(imageView);

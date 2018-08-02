@@ -46,7 +46,6 @@ import com.wei.qrcodescanner.ScanerActivity;
 import com.wei.utillibrary.FileUtil;
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.dagger_android.DaggerAndroidActivity;
-import com.wei.wanandroid.activity.db.ObjectBoxActivity;
 import com.wei.wanandroid.activity.eventdispatch.EventDispatchActivity;
 import com.wei.wanandroid.activity.fragment.FragActivity;
 import com.wei.wanandroid.activity.http.OkHttp3Activity;
@@ -59,7 +58,6 @@ import com.wei.wanandroid.activity.ndk.JNIActivity;
 import com.wei.wanandroid.activity.recyclerview.RecyclerViewActivity;
 import com.wei.wanandroid.activity.rx.RxJavaActivity;
 import com.wei.wanandroid.activity.webview.WebActivity;
-import com.wei.wanandroid.activity.webview.X5WebActivity;
 import com.wei.wanandroid.bean.EventMessage;
 import com.wei.wanandroid.service.MyIntentService;
 import com.wei.wanandroid.service.MyService;
@@ -71,8 +69,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -488,7 +484,7 @@ public class MainActivity extends BaseActivity
                 break;
 
             case R.id.action_objBox:
-                startActivity(new Intent(this, ObjectBoxActivity.class));
+//                startActivity(new Intent(this, ObjectBoxActivity.class));
                 break;
 
             case Menu.FIRST + 1:

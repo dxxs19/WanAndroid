@@ -276,17 +276,15 @@ public class SearchAreaActivity extends AppCompatActivity implements TextView.On
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_cancel:
-                finish();
-                break;
-
-            case R.id.imgView_clear:
-                mET_Search.setText("");
-                break;
-
-            default:
+    public void onClick(View v)
+    {
+        if (v.getId() == R.id.tv_cancel)
+        {
+            finish();
+        }
+        else if (v.getId() == R.id.imgView_clear)
+        {
+            mET_Search.setText("");
         }
     }
 }

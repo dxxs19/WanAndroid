@@ -74,6 +74,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="FxPjjlIucsWiFUCSXHkeffwU0AcC6OgH">
+        </meta-data>
         <activity
             android:name=".activity.http.OkHttp3Activity"
             android:launchMode="singleTask"/>

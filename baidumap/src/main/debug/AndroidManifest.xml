@@ -16,15 +16,25 @@
     <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
     <application
+        android:name=".BaiduMapApp"
         android:allowBackup="true"
-        android:supportsRtl="true">
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <activity android:name=".BaiduMainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
-        <!--<meta-data-->
-            <!--android:name="com.baidu.lbsapi.API_KEY"-->
-            <!--android:value="LaDSiTf0qS9PxWjP6T1K8GO0CVdNA3mU">-->
-        <!--</meta-data>-->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="LaDSiTf0qS9PxWjP6T1K8GO0CVdNA3mU">
+        </meta-data>
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"/>
         <activity android:name=".MapLocationActivity"
             android:launchMode="singleTop"

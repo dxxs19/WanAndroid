@@ -148,4 +148,5 @@ dependencies {
     api 'com.google.dagger:dagger-android-support:2.16'
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.16'
     api 'com.android.support:multidex:1.0.3'
+    implementation project(':baidumap')
 }

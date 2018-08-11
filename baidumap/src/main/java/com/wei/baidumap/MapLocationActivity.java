@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
+import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
 import com.baidu.mapapi.map.BitmapDescriptorFactory;
@@ -48,7 +49,7 @@ import java.text.DecimalFormat;
  */
 public class MapLocationActivity extends FragmentActivity implements View.OnClickListener {
     private final String TAG = getClass().getSimpleName();
-    private final int REQUESTCODE_SEARCH = 0x12;
+    public static final int REQUESTCODE_LOCATION = 0x11, REQUESTCODE_SEARCH = 0x12;
     public MyLocationListenner myListener = new MyLocationListenner();
     private MyLocationConfiguration.LocationMode mCurrentMode;
     BitmapDescriptor mCurrentMarker;
@@ -56,7 +57,6 @@ public class MapLocationActivity extends FragmentActivity implements View.OnClic
     MapView mMapView;
     BaiduMap mBaiduMap;
 
-    static Context mContext;
     // UI相关
 
     ImageButton requestLocButton;
@@ -74,10 +74,20 @@ public class MapLocationActivity extends FragmentActivity implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mContext = this;
+        initBaiduMap();
         initView();
         initListener();
         initMap();
+    }
+
+    private void initBaiduMap()
+    {
+        Log.e(TAG, "初始化百度定位sdk");
+        /***
+         * 初始化定位sdk，建议在Application中创建
+         */
+        locationService = new LocationService(getApplicationContext());
+        SDKInitializer.initialize(getApplicationContext());
     }
 
     private void initView()
@@ -104,35 +114,32 @@ public class MapLocationActivity extends FragmentActivity implements View.OnClic
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId())
+    public void onClick(View v)
+    {
+        int viewId = v.getId();
+        if (viewId == R.id.tv_cancel)
         {
-            case R.id.tv_cancel:
-                finish();
-                break;
-
-            case R.id.rl_location_details:
-            case R.id.tv_confirm:
-                Intent intent = getIntent();
-                intent.putExtra("lat", mLat);
-                intent.putExtra("lon", mLon);
-                setResult(Activity.RESULT_OK, intent);
-                finish();
-                break;
-
-            case R.id.imgView_clear:
-                mInputEdtTxt.setText("");
-                break;
-
-            case R.id.edtTxt_input:
-                Intent intent1 = new Intent(this, SearchAreaActivity.class);
-                intent1.putExtra(SearchAreaActivity.INTENT_KEY_CITY, mCurrentCity);
-                intent1.putExtra(SearchAreaActivity.INTENT_KEY_LAT, mLat);
-                intent1.putExtra(SearchAreaActivity.INTENT_KEY_LNG, mLon);
-                startActivityForResult(intent1, REQUESTCODE_SEARCH);
-                break;
-
-            default:
+            finish();
+        }
+        else if (viewId == R.id.rl_location_details || viewId == R.id.tv_confirm)
+        {
+            Intent intent = getIntent();
+            intent.putExtra("lat", mLat);
+            intent.putExtra("lon", mLon);
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+        }
+        else if (viewId == R.id.imgView_clear)
+        {
+            mInputEdtTxt.setText("");
+        }
+        else if (viewId == R.id.edtTxt_input)
+        {
+            Intent intent1 = new Intent(this, SearchAreaActivity.class);
+            intent1.putExtra(SearchAreaActivity.INTENT_KEY_CITY, mCurrentCity);
+            intent1.putExtra(SearchAreaActivity.INTENT_KEY_LAT, mLat);
+            intent1.putExtra(SearchAreaActivity.INTENT_KEY_LNG, mLon);
+            startActivityForResult(intent1, REQUESTCODE_SEARCH);
         }
     }
 
@@ -165,7 +172,6 @@ public class MapLocationActivity extends FragmentActivity implements View.OnClic
         mBaiduMap.setMyLocationEnabled(true);
         // 开启室内图
         mBaiduMap.setIndoorEnable(true);
-        locationService = BaiduMapApp.sBaiduMapApp.getLocationService();
         //获取locationservice实例，建议应用中只初始化1个location实例，然后使用，可以参考其他示例的activity，都是通过此种方式获取locationservice实例的
         locationService.registerListener(myListener);
         //注册监听

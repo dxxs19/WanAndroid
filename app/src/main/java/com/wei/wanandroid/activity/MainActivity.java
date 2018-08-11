@@ -42,6 +42,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wei.baidumap.MapLocationActivity;
 import com.wei.qrcodescanner.ScanerActivity;
 import com.wei.utillibrary.FileUtil;
 import com.wei.wanandroid.R;
@@ -561,7 +562,8 @@ public class MainActivity extends BaseActivity
         switch (view.getId())
         {
             case R.id.btn_test:
-                testCusDialog("请输入开门密码！");
+//                testCusDialog("请输入开门密码！");
+                startActivityForResult(new Intent(this, MapLocationActivity.class), MapLocationActivity.REQUESTCODE_LOCATION);
                 break;
 
             case R.id.btn_qrscan:
@@ -593,6 +595,14 @@ public class MainActivity extends BaseActivity
                 String code = data.getString(ScanerActivity.KEY_SCAN_RESULT);
                 Log.d(TAG, "扫描结果: " + code);
                 mContentTv.setText(code);
+            }
+        }
+        else if (requestCode == MapLocationActivity.REQUESTCODE_LOCATION && resultCode == Activity.RESULT_OK) {
+            Bundle data = intent.getExtras();
+            if (data != null) {
+                double lat = data.getDouble("lat", 0L);
+                double lon = data.getDouble("lon", 0L);
+                Log.d(TAG, "经纬度: " + lon + ", " + lat);
             }
         }
     }

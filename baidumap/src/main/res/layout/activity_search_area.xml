@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#f3f4f5"
+    >
+
+    <RelativeLayout
+        android:id="@+id/ll_search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f0f0f0"
+        >
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/NormalPadding"
+            android:text="取消"
+            android:textColor="@color/textColor_A2"
+            android:textSize="@dimen/textsize_b4"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/NormalPadding"
+            android:layout_toLeftOf="@id/tv_cancel"
+            android:background="@drawable/bg_white_big_conner"
+            android:padding="@dimen/ItemSpace"
+            >
+
+            <ImageView
+                android:id="@+id/imgView_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="@dimen/MiddlePadding"
+                android:src="@drawable/btn_cancle"
+                android:visibility="gone"/>
+
+            <EditText
+                android:id="@+id/edtTxt_input"
+                android:layout_toLeftOf="@id/imgView_clear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:drawableLeft="@drawable/btn_ic_search"
+                android:drawablePadding="@dimen/ItemSpace"
+                android:imeOptions="actionSearch"
+                android:maxLength="100"
+                android:paddingLeft="@dimen/MiddlePadding"
+                android:singleLine="true"
+                android:textColor="@color/textColor_A1"
+                android:textSize="15sp"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#fff"
+        android:dividerHeight="0px"
+        android:listSelector="@drawable/editable_bg_selector"/>
+
+    <include
+        android:id="@+id/emptyview"
+        layout="@layout/listview_empty_view"/>
+</LinearLayout>

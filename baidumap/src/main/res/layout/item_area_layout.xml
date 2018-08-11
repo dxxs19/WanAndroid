@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_login_selector"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/MiddlePadding"
+        android:paddingRight="@dimen/MiddlePadding"
+        android:paddingTop="@dimen/NormalPadding"
+        android:text="阳光酒店"
+        android:singleLine="true"
+        android:textSize="16sp"/>
+
+    <include layout="@layout/line"/>
+
+    <TextView
+        android:id="@+id/txt_addr"
+        android:layout_below="@id/txt_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/NormalPadding"
+        android:paddingLeft="@dimen/MiddlePadding"
+        android:paddingRight="@dimen/MiddlePadding"
+        android:paddingTop="@dimen/MiddlePadding"
+        android:textColor="@color/textColor_A3"
+        android:text="天河区黄埔大道中"
+        android:singleLine="true"
+        android:textSize="14sp"/>
+
+    <include layout="@layout/line"/>
+</RelativeLayout>

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WanAndroid.iml" filepath="$PROJECT_DIR$/WanAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/baidumap/baidumap.iml" filepath="$PROJECT_DIR$/baidumap/baidumap.iml" />
       <module fileurl="file://$PROJECT_DIR$/processorCompiler/processorCompiler.iml" filepath="$PROJECT_DIR$/processorCompiler/processorCompiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/processorLib/processorLib.iml" filepath="$PROJECT_DIR$/processorLib/processorLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/pushlibrary/pushlibrary.iml" filepath="$PROJECT_DIR$/pushlibrary/pushlibrary.iml" />

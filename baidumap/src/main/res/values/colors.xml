@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!--文字色-->
+    <color name="textColor_A1">#222222</color><!--黑色-->
+    <color name="textColor_A2">#ff661b</color><!--橙色-->
+    <color name="textColor_A3">#6a6a6a</color><!--淡黑色-->
+    <color name="textColor_A4">#aaaaaa</color><!--灰色-->
+    <color name="textColor_A5">#cccccc</color><!--淡灰色-->
+    <color name="textColor_A6">#333333</color><!--淡黑色-->
+
+    <color name="white">#ffffffff</color>
+    <color name="gray_bg_light">#ffeeedf3</color>
+    <color name="gray_light_text">#ff8e8e93</color>
+    <color name="bg_common">#F0F0F0</color>
+    <color name="color_6a">#aaaaaa</color>
+    <color name="color_6b">#bbbbbb</color>
+    <color name="color_6c">#cccccc</color>
+    <color name="color_66">#ff666666</color>
+    <color name="color_69">#999999</color>
+    <color name="color_62">#222222</color>
+    <color name="color_line">#cecece</color>
+    <color name="bg_f0f0f0">#f0f0f0</color>
+    <color name="textColor_fc9153">#fc9153</color>
+    <color name="color_f8f8f8">#f8f8f8</color>
+</resources>

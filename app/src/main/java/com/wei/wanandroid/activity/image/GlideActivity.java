@@ -4,8 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.BaseActivity;
 
@@ -37,12 +38,29 @@ public class GlideActivity extends BaseActivity
         GlideApp.with(this)
 //                .load(gifUrl)
                 .load(url)
-//                .load(R.drawable.ic_launcher_background)
-                .placeholder(R.drawable.logo_yuanjiao_120)
-//                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .override(900, 750)
-                // 跳过缓存，即不缓存。
-//                .skipMemoryCache(true)
+//                .apply(getCircleCropTransformOptions())
+                .apply(getRoundedCornersOptions())
                 .into(imageView);
+    }
+
+    // 加载圆形图片
+    private RequestOptions getCircleCropTransformOptions() {
+        RequestOptions requestOptions = RequestOptions.circleCropTransform()
+                .placeholder(R.drawable.logo_yuanjiao_120)
+                .override(300, 250)
+                .diskCacheStrategy(DiskCacheStrategy.NONE) // 不做磁盘缓存
+                .skipMemoryCache(true);  // 不做内存缓存
+        return requestOptions;
+    }
+
+    // 加载圆角图片
+    private RequestOptions getRoundedCornersOptions() {
+        RoundedCorners roundedCorners = new RoundedCorners(30);
+        RequestOptions requestOptions = RequestOptions.bitmapTransform(roundedCorners)
+                .placeholder(R.drawable.logo_yuanjiao_120)
+                .override(300, 250)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true);
+        return requestOptions;
     }
 }

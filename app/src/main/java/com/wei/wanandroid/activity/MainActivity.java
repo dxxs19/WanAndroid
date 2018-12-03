@@ -392,13 +392,12 @@ public class MainActivity extends BaseActivity
 //        ObjectAnimator.ofFloat(mMoveImgView, "translationX", 0, 400).setDuration(3000).start();
         TextUtils.equals(null, null);
         Log.e(TAG, "onResume  mMoveImgView 宽高为 : " + mMoveImgView.getWidth() + ", " + mMoveImgView.getHeight());
-//        startService(new Intent(this, MyService.class));
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        testKeeplive();
+        testKeeplive();
     }
 
     private void testKeeplive() {

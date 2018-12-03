@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 def WEI_PWD = '123456'
 def cfg = rootProject.ext.android
 android {
@@ -149,4 +150,5 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.16'
     api 'com.android.support:multidex:1.0.3'
     implementation project(':baidumap')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

@@ -47,6 +47,7 @@ import com.wei.qrcodescanner.ScanerActivity;
 import com.wei.utillibrary.FileUtil;
 import com.wei.wanandroid.R;
 import com.wei.wanandroid.activity.dagger_android.DaggerAndroidActivity;
+import com.wei.wanandroid.activity.draw.DrawActivity;
 import com.wei.wanandroid.activity.eventdispatch.EventDispatchActivity;
 import com.wei.wanandroid.activity.fragment.FragActivity;
 import com.wei.wanandroid.activity.http.OkHttp3Activity;
@@ -485,6 +486,10 @@ public class MainActivity extends BaseActivity
 
             case R.id.action_objBox:
 //                startActivity(new Intent(this, ObjectBoxActivity.class));
+                break;
+
+            case R.id.action_draw:
+                startActivity(new Intent(this, DrawActivity.class));
                 break;
 
             case Menu.FIRST + 1:
